@@ -1,0 +1,7 @@
+pelican
+markdown
+typogrify
+beautifulsoup4
+lxml
+ghp-import
+pelican-alias
