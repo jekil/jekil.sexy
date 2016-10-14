@@ -110,7 +110,7 @@ SITEMAP = {
 
 # Plugins.
 PLUGIN_PATHS = ['./pelican-plugins']
-PLUGINS = ['sitemap', 'post_stats', 'pelican-alias']
+PLUGINS = ['sitemap', 'post_stats', 'pelican_alias']
 
 # Third party services.
 ADD_THIS_ID = 'ra-5121ee9b233b392d'
