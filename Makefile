@@ -118,8 +118,8 @@ cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
 
 github: publish
-	COMMIT_MESSAGE='Publishing site on `date "+%Y-%m-%d %H:%M:%S"` from `git log -n 1 --format="commit %h - %s"`'
-	ghp-import -b $(GITHUB_PAGES_BRANCH) -m $(COMMIT_MESSAGE) -n $(OUTPUTDIR)
+	COMMIT_MESSAGE=$(shell git --no-pager log --format=%s -n 1)
+	ghp-import -b $(GITHUB_PAGES_BRANCH) -m "$(COMMIT_MESSAGE)" -n $(OUTPUTDIR)
 	@git push -fq https://${GH_TOKEN}@github.com/$(TRAVIS_REPO_SLUG).git $(GITHUB_PAGES_BRANCH)
 
 .PHONY: html help clean regenerate serve serve-global devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github
