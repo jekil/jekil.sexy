@@ -9,3 +9,10 @@ import os
 import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
+
+# Third party services.
+ADD_THIS_ID = 'ra-5121ee9b233b392d'
+#DISQUS_SITENAME = ''
+GOOGLE_ANALYTICS = 'UA-2317228-19'
+#GOOGLE_TAG_MANAGER = ''
+#STATUSCAKE = { 'trackid': 'your-id', 'days': 7, 'design': 6, 'rumid': 1234 }
