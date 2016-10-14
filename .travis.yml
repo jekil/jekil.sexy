@@ -5,11 +5,14 @@ sudo: required
 cache: pip
 branches:
   only:
-  - master
+    - master
 env:
   global:
     secure: rQKNLzsJYRP3SuMzWy0X1ej77Oi9Zwlf9vgsh721iib0mAUXiIJH3jiw+j3PVeFKGmuKEktRfZQ4/bm8iyw/0qCo8kWaojXIZ3Zf//Dp9L9R0Jo15RCcu8O+aoiiNwIhgFGiAGGbG+BnFKQ0QqSE4pJw9M+TAFzK2QJAei5xhdrmhekC5jATu9JObbpdVKBg9GCdh66GPgT3ZeY7xgnkGQbs1uSKg0w1Eo91wjn2VtFxgOkQN7Kx7foHbuf2IZFxKDwFU6x0AEQF/T7j4bmuDVcCuivtbZ6u28ujQ3Z5HyPiRCbpUnNjlBSgCuSN0nsTLkGZoaUfPN56QRTFmiiGFghjL2Jh8QXgJgGrtFPVVp98keOID+WLBFyWU9LFMRF+2aIuW+DzFih0bsJLod893k6lvBs0rvF0cdv+rJwv3H9sUEkdhLLDGN3SlBjyGDCu8tOFXnKmaTz0+sk51UBExekVr6zha4riaWOIah/f2uLVqQVcqEbG71ah33vGcbo/dQ3zl3rBbvoh7vqgGK6Spc3fKCH4CojG9+GyXleUhLlGENzyco4zSGmqaYOp9EPNNrLV4ImDZDAA2g31bIXzUa1e14127N8REnxRFqf4CU7Y5PUM5KVtnrlBoAFNeLh2FC4+WtUY2cSMR/R9n5/TXNEKjm92oBDxP7Co8fS01xo=
 install:
-- pip install -r requirements.txt
+  - pip install -r requirements.txt
 script:
-- make publish github
+  - make publish github
+before_script:
+  - git config --global user.email "alessandro@lonerunners.net"
+  - git config --global user.name "Travis-CI"
