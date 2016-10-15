@@ -8,8 +8,7 @@ SITENAME = u"jekil.sexy"
 SUBTITLE = u"%s's thoughts" % AUTHOR
 SITESUBTITLE = ''
 SITEDESCRIPTION = '%s\'s Thoughts and Writings' % AUTHOR
-#SITELOGO = '//en.gravatar.com/userimage/1102835/b3d4849b4a4d278802653df35bcc11f6?size=120'
-#FAVICON = SITEURL + '/images/favicon.ico'
+SITELOGO = '//en.gravatar.com/userimage/1102835/b3d4849b4a4d278802653df35bcc11f6?size=120'
 ROBOTS = 'index, follow'
 
 # Paths.
