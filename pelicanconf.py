@@ -13,7 +13,7 @@ ROBOTS = 'index, follow'
 
 # Paths.
 PATH = 'content'
-STATIC_PATHS = ['images', 'extra', 'public']
+STATIC_PATHS = ['images', 'extra', 'static']
 ARTICLE_PATHS = ['blog']
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{slug}.html'
 ARTICLE_URL = 'blog/{date:%Y}/{slug}.html'
@@ -25,7 +25,7 @@ OUTPUT_RETENTION = ['.git']
 # Style.
 THEME = "pelican-themes/flex"
 BROWSER_COLOR = '#333'
-PYGMENTS_STYLE = 'monokai'
+PYGMENTS_STYLE = 'github'
 TYPOGRIFY = True
 SUMMARY_MAX_LENGTH = 100
 
