@@ -24,7 +24,7 @@ OUTPUT_RETENTION = ['.git']
 
 # Style.
 THEME = "pelican-themes/flex"
-#BROWSER_COLOR = '#333'
+BROWSER_COLOR = '#333'
 PYGMENTS_STYLE = 'monokai'
 TYPOGRIFY = True
 SUMMARY_MAX_LENGTH = 100
