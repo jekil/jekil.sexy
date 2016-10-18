@@ -13,7 +13,7 @@ ROBOTS = 'index, follow'
 
 # Paths.
 PATH = 'content'
-STATIC_PATHS = ['images', 'extra', 'static']
+STATIC_PATHS = ['images', 'public', 'static']
 ARTICLE_PATHS = ['blog']
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{slug}.html'
 ARTICLE_URL = 'blog/{date:%Y}/{slug}.html'
@@ -45,7 +45,6 @@ LOAD_CONTENT_CACHE = False
 # Blog conf.
 MAIN_MENU = False
 USE_FOLDER_AS_CATEGORY = False
-STATIC_PATHS = ['extra']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/favicon.ico': {'path': 'favicon.ico'},
