@@ -27,7 +27,7 @@ THEME = "pelican-themes/flex"
 BROWSER_COLOR = '#333'
 PYGMENTS_STYLE = 'github'
 TYPOGRIFY = True
-SUMMARY_MAX_LENGTH = 100
+SUMMARY_MAX_LENGTH = 20
 
 # Locals.
 TIMEZONE = 'Europe/London'
@@ -41,6 +41,7 @@ DEFAULT_PAGINATION = 5
 
 # Debug (true in production).
 LOAD_CONTENT_CACHE = False
+USE_LESS = True
 
 # Blog conf.
 MAIN_MENU = False
@@ -107,4 +108,4 @@ SITEMAP = {
 
 # Plugins.
 PLUGIN_PATHS = ['./pelican-plugins']
-PLUGINS = ['sitemap', 'post_stats', 'pelican_alias']
+PLUGINS = ['sitemap', 'post_stats', 'pelican_alias', 'pelican_youtube']
