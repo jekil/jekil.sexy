@@ -27,7 +27,7 @@ THEME = "pelican-themes/flex"
 BROWSER_COLOR = '#333'
 PYGMENTS_STYLE = 'github'
 TYPOGRIFY = True
-SUMMARY_MAX_LENGTH = 20
+SUMMARY_MAX_LENGTH = 100
 
 # Locals.
 TIMEZONE = 'Europe/London'
