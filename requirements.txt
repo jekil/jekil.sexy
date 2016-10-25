@@ -1,8 +1,8 @@
-pelican
-markdown
-typogrify
-beautifulsoup4
-lxml
-ghp-import
-pelican-alias
-pelican-youtube
+pelican==3.6.3
+Markdown==2.6.7
+typogrify==2.0.7
+beautifulsoup4==4.5.1
+lxml==3.6.4
+ghp-import==0.4.1
+pelican-alias==1.1
+pelican-youtube==0.2.0
