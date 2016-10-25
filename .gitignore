@@ -1,6 +1,5 @@
 cache
 pelican-plugins
-pelican-themes
 output/
 *.pyc
 *.pid
