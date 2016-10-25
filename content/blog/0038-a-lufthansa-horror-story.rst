@@ -8,21 +8,22 @@ A Lufthansa Horror Story
 :status: published
 :alias: /blog/a-lufthansa-horror-story
 
-    **TL;DR:** What happened today? Thanks to the worst customer service
-    provided by `Lufthansa <http://www.lufthansa.com/>`__ I am going to
-    explain you why I missed a day in Vegas and why, in my over 15 years
-    experience, you should stop flying Lufthansa.
+**TL;DR:** What happened today? Thanks to the worst customer service
+provided by `Lufthansa <http://www.lufthansa.com/>`__ I am going to
+explain you why I missed a day in Vegas and why, in my over 15 years
+experience, you should stop flying Lufthansa.
 
-| Today, I was heading to Las Vegas, to chill out at `Black
-  Hat <https://www.blackhat.com/>`__ and
-  `Defcon <https://www.defcon.org/>`__, via Frankfurt and Philadelphia.
-  I was flying  Lufthansa, because in long flights I prefer to spend
-  more and be safe; with my 2 dogs in a checked-in box. Due to many
-  Lufthansa fails in logistics and customer service I miss my flight and
-  I have been *re-protected* on a flight tomorrow.
-| So I would dissect the problem, to understand how multiple faults
-  could face in missing a flight and have a reputational issue to
-  manage.
+Today, I was heading to Las Vegas, to chill out at
+`BlackHat <https://www.blackhat.com/>`__ and
+`Defcon <https://www.defcon.org/>`__, via Frankfurt and Philadelphia.
+I was flying  Lufthansa, because in long flights I prefer to spend
+more and be safe; with my 2 dogs in a checked-in box. Due to many
+Lufthansa fails in logistics and customer service I miss my flight and
+I have been *re-protected* on a flight tomorrow.
+
+So I would dissect the problem, to understand how multiple faults
+could face in missing a flight and have a reputational issue to
+manage.
 
 In my opinion Lufthansa fails could be categorized as follows:
 
