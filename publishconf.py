@@ -11,7 +11,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 # Publish settings.
-SITEURL = "https://jekil.github.io/jekil.sexy/"
+SITEURL = "https://jekil.github.io/jekil.sexy"
 
 # Third party services.
 ADD_THIS_ID = 'ra-5121ee9b233b392d'
