@@ -4,3 +4,4 @@ output/
 *.pyc
 *.pid
 content/drafts
+static/stylesheet/style.min.css
