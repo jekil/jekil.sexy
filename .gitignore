@@ -4,4 +4,7 @@ output/
 *.pyc
 *.pid
 content/drafts
+
+# Generated with gulp. 
 static/stylesheet/style.min.css
+static/font-awesome/
