@@ -2,7 +2,7 @@ DEFCON 18 CTF quals - Forensic 100 writeup
 ##########################################
 :date: 2010-06-19 15:51
 :author: jekil
-:category: Forensic
+:category: Blog
 :tags: CTF, DEFCON, quals
 :slug: defcon-18-ctf-quals-forensic-100-writeup
 :status: published
