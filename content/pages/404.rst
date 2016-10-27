@@ -1,0 +1,15 @@
+404
+###
+:title: 404 Page not found :(
+:slug: 404
+:status: hidden
+:save_as: 404.html
+
+Sorry, but the page you are looking for has not been found, please check have you typed address correctly.
+
+You can also use "Back" button in your browser to go back, or simply go to the `homepage </>`__.
+
+|Page not found|
+
+.. |Page not found| image:: {filename}/static/images/404.jpg
+   :target: {filename}/static/images/404.jpg
