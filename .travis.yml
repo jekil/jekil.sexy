@@ -7,9 +7,12 @@ branches:
   only:
     - master
 install:
+  - cd pelican-themes/fles && npm install && cd -
   - pip install -r requirements.txt
 script:
   - make publish github
 before_script:
   - git config --global user.email ${EMAIL}
   - git config --global user.name ${NICK}
+after_script:
+  - curl -X DELETE "https://api.cloudflare.com/client/v4/zones/${CF_ZONEID}/purge_cache" -H "X-Auth-Email: ${CF_EMAIL}" -H "X-Auth-Key: ${CF_AUTH}" -H "Content-Type: application/json" --data '{"purge_everything":true}'
