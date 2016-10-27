@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from datetime import date
 
 AUTHOR = u'Alessandro Tanasi'
-SITENAME = u"jekil.sexy"
-SUBTITLE = u"%s's thoughts" % AUTHOR
-SITESUBTITLE = ''
+SITENAME = u"jekil's blog"
+SITETITLE = SITENAME
+SITESUBTITLE = u"%s's thoughts" % AUTHOR
 SITEDESCRIPTION = '%s\'s Thoughts and Writings' % AUTHOR
 SITELOGO = '//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120'
 ROBOTS = 'index, follow'
@@ -44,7 +44,7 @@ LOAD_CONTENT_CACHE = False
 USE_LESS = True
 
 # Blog conf.
-MAIN_MENU = False
+MAIN_MENU = True
 USE_FOLDER_AS_CATEGORY = False
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
@@ -70,7 +70,7 @@ AUTHOR_FEED_RSS = None
 #         ('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('envelope-o', '/pages/contact/'),
+SOCIAL = (('envelope-o', 'mailto:alessandro@tanasi.it'),
           ('linkedin', 'https://www.linkedin.com/in/alessandrotanasi'),
           ('github', 'https://github.com/jekil'),
           ('twitter', 'https://twitter.com/jekil'),
