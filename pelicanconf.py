@@ -57,7 +57,7 @@ COPYRIGHT_YEAR = date.today().year
 
 # Feeds.
 FEED_DOMAIN = 'http://feeds.feedburner.com'
-FEED_ALL_ATOM = 'jekil_is_sexy?format=xml'
+FEED_ALL_ATOM = 'jekil_is_sexy'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
