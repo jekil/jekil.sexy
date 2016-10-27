@@ -91,6 +91,7 @@ CC_LICENSE = {
     'version': '4.0',
     'slug': 'by-sa'
 }
+CC_LICENSE_IMG = False
 
 SITEMAP = {
     'format': 'xml',
