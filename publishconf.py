@@ -13,6 +13,10 @@ from pelicanconf import *
 # Publish settings.
 SITEURL = "https://jekil.sexy"
 
+# Disable debug options.
+LOAD_CONTENT_CACHE = True
+USE_LESS = False
+
 # Third party services.
 ADD_THIS_ID = 'ra-5121ee9b233b392d'
 #DISQUS_SITENAME = ''

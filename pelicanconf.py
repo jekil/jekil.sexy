@@ -39,7 +39,7 @@ DATE_FORMATS = {
 }
 DEFAULT_PAGINATION = 5
 
-# Debug (true in production).
+# Debug options.
 LOAD_CONTENT_CACHE = False
 USE_LESS = True
 
