@@ -47,8 +47,9 @@ USE_LESS = True
 MAIN_MENU = True
 USE_FOLDER_AS_CATEGORY = False
 EXTRA_PATH_METADATA = {
-    'extra/robots.txt': {'path': 'robots.txt'},
-    'extra/favicon.ico': {'path': 'favicon.ico'},
+    'static/robots.txt': {'path': 'robots.txt'},
+    'static/favicon.ico': {'path': 'favicon.ico'},
+    'static/CNAME': {'path': 'CNAME'},
 }
 DEFAULT_METADATA = {
     'status': 'draft',
