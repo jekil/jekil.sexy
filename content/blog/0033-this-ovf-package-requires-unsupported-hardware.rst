@@ -99,3 +99,4 @@ Now all should work.
    :width: 300px
    :height: 155px
    :target: {filename}/images/2015/03/20130530152156.jpg
+   :class: img-center

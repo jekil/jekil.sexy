@@ -13,3 +13,4 @@ You can also use "Back" button in your browser to go back, or simply go to the `
 
 .. |Page not found| image:: {filename}/static/images/404.jpg
    :target: {filename}/static/images/404.jpg
+   :class: img-center

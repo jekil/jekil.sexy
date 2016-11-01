@@ -118,35 +118,44 @@ Kudos to FBI and other agencies for the joint operation.
    :width: 531px
    :height: 368px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-21.24.46.png
+   :class: img-center
 .. |FBI twitter statement on Silk Road 2.| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-21.29.08.png
    :width: 508px
    :height: 199px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-21.29.08.png
+   :class: img-center
 .. |Undercover agent in Silk Road 2| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.10.22.png
    :width: 300px
    :height: 122px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.10.22.png
+   :class: img-center
 .. |Silk Road bitcoin tumbler| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.28.10.png
    :width: 300px
    :height: 92px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.28.10.png
+   :class: img-center
 .. |Silk Road OPSEC| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.40.17.png
    :width: 300px
    :height: 66px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.40.17.png
+   :class: img-center
 .. |Silk road risks| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.49.53.png
    :width: 300px
    :height: 143px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.49.53.png
+   :class: img-center
 .. |Silk road hacked| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.54.37.png
    :width: 300px
    :height: 153px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-22.54.37.png
+   :class: img-center
 .. |Blake Benthall| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-23.17.13.png
    :width: 300px
    :height: 49px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-23.17.13.png
+   :class: img-center
 .. |Identification with browser fingerprint| image:: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-23.28.43.png
    :width: 300px
    :height: 239px
    :target: {filename}/images/2014/11/Screen-Shot-2014-11-07-at-23.28.43.png
+   :class: img-center

@@ -36,3 +36,4 @@ Enyoj! \ https://forum.getghiro.org
    :width: 300px
    :height: 235px
    :target: {filename}/images/2015/08/eab.jpg
+   :class: img-center
