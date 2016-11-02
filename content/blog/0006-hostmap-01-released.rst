@@ -6,7 +6,7 @@ hostmap 0.1 released
 :tags: discovery, dns enumeration, dns name, virtual host
 :slug: hostmap-01-released
 :status: published
-:alias: /tools/hostmap-01-released
+:alias: /tools/hostmap-01-released/
 
 I am happy to announce hostmap:
 

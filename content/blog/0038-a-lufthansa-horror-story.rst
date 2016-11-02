@@ -6,7 +6,7 @@ A Lufthansa Horror Story
 :tags: flight, lufthansa
 :slug: a-lufthansa-horror-story
 :status: published
-:alias: /blog/a-lufthansa-horror-story
+:alias: /blog/a-lufthansa-horror-story/
 
 **TL;DR:** What happened today? Thanks to the worst customer service
 provided by `Lufthansa <http://www.lufthansa.com/>`__ I am going to

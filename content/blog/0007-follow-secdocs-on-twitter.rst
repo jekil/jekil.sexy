@@ -6,7 +6,7 @@ Follow Secdocs on Twitter
 :tags: secdocs, twitter
 :slug: follow-secdocs-on-twitter
 :status: published
-:alias: /blog/follow-secdocs-on-twitter
+:alias: /blog/follow-secdocs-on-twitter/
 
 | You can follow `SecDocs <http://secdocs.lonerunners.net>`__ updates on
   `Twitter <http://twitter.com/secdocs>`__ now! With few lines of ruby

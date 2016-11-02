@@ -6,7 +6,7 @@ Ghiro development repository moved
 :tags: ghiro
 :slug: ghiro-development-repository-moved
 :status: published
-:alias: /tools/ghiro-development-repository-moved
+:alias: /tools/ghiro-development-repository-moved/
 
 Ghiro development branch moved!
 

@@ -6,7 +6,7 @@ New Ghiro website
 :tags: ghiro
 :slug: new-ghiro-website
 :status: published
-:alias: /tools/new-ghiro-website
+:alias: /tools/new-ghiro-website/
 
 It seems that the old `Ghiro website <http://www.getghiro.org/>`__ was
 too hard for understand for people visiting it.

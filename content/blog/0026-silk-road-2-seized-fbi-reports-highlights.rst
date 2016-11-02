@@ -6,7 +6,7 @@ Silk Road 2 Seized: FBI Report Highlights
 :tags: cybercrime, darknet, FBI, Silk Road 2
 :slug: silk-road-2-seized-fbi-reports-highlights
 :status: published
-:alias: /blog/silk-road-2-seized-fbi-reports-highlights
+:alias: /blog/silk-road-2-seized-fbi-reports-highlights/
 
 It is not a flashing news, yesterday **Silk Road 2** has been closed,
 admin has been **arrested** and charged, meanwhile in US and EU servers

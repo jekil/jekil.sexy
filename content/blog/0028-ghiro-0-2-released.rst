@@ -6,7 +6,7 @@ Ghiro 0.2 released
 :tags: ghiro, image forensics
 :slug: ghiro-0-2-released
 :status: published
-:alias: /tools/ghiro-0-2-released
+:alias: /tools/ghiro-0-2-released/
 
 It took some time, but here we are, I am really happy to say: we
 released **Ghiro 0.2**! We continuously love to improve Ghiro's feature

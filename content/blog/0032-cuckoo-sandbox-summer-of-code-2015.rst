@@ -6,7 +6,7 @@ Cuckoo Sandbox Summer of Code 2015
 :tags: cuckoo, GSOC, GSOC2015
 :slug: cuckoo-sandbox-summer-of-code-2015
 :status: published
-:alias: /tools/cuckoo-sandbox-summer-of-code-2015
+:alias: /tools/cuckoo-sandbox-summer-of-code-2015/
 
 | This summer the `Cuckoo Sandbox <http://cuckoosandbox.org/>`__ project
   is participating the `Google Summer of Code

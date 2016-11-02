@@ -6,7 +6,7 @@ Website defacement detection techniques
 :tags: defacement, detection, website monitoring
 :slug: website-defacement-detection-techniques
 :status: published
-:alias: /paper/website-defacement-detection-techniques
+:alias: /paper/website-defacement-detection-techniques/
 
 Table of Contents
 -----------------

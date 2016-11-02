@@ -6,7 +6,7 @@ Virtual host and DNS names enumeration techniques
 :tags: discovery, dns alias, dns name, enumeration, hostmap, virtual host
 :slug: virtual-host-and-dns-names-enumeration-techniques
 :status: published
-:alias: /paper/virtual-host-and-dns-names-enumeration-techniques
+:alias: /paper/virtual-host-and-dns-names-enumeration-techniques/
 
 Table of Contents
 -----------------

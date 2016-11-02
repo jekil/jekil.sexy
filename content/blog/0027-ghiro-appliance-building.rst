@@ -6,7 +6,7 @@ Ghiro Appliance Building
 :tags: appliance, ghiro, image forensics
 :slug: ghiro-appliance-building
 :status: published
-:alias: /tools/ghiro-appliance-building
+:alias: /tools/ghiro-appliance-building/
 
 All started with us thinking about a way to provide users with the
 **simplest** and **fastest** method to test or deploy

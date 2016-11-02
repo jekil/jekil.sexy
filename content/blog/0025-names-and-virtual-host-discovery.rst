@@ -6,7 +6,7 @@ Names and virtual host discovery
 :tags: slides, virtual host
 :slug: names-and-virtual-host-discovery
 :status: published
-:alias: /blog/names-and-virtual-host-discovery
+:alias: /blog/names-and-virtual-host-discovery/
 
 Short speech about "Names and virtual host discovery" at
 `ESC <http://endsummercamp.org>`__ 2014, a basic task during the

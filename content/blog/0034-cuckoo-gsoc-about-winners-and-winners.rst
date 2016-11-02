@@ -6,7 +6,7 @@ Cuckoo GSOC: about winners and winners
 :tags: cuckoo, GSOC2015
 :slug: cuckoo-gsoc-about-winners-and-winners
 :status: published
-:alias: /blog/cuckoo-gsoc-about-winners-and-winners
+:alias: /blog/cuckoo-gsoc-about-winners-and-winners/
 
 I hope you already know, this year `Cuckoo
 Sandbox <http://cuckoosandbox.org/>`__ joined the `Google Summer of

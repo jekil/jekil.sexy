@@ -6,7 +6,7 @@ Homemade custom interaction DNS honeypot
 :tags: dns, honeypot
 :slug: homemade-custom-interaction-dns-honeypot
 :status: published
-:alias: /tools/homemade-custom-interaction-dns-honeypot
+:alias: /tools/homemade-custom-interaction-dns-honeypot/
 
 | Time ago I needed a weird DNS honeypot with "some" level of
   interaction.

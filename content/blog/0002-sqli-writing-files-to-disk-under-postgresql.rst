@@ -6,7 +6,7 @@ SQLi: Writing files to disk under PostgreSQL
 :tags: exploiting, PostgreSQL, SQL Injection, SQLi, writing file
 :slug: sqli-writing-files-to-disk-under-postgresql
 :status: published
-:alias: /paper/sqli-writing-files-to-disk-under-postgresql
+:alias: /paper/sqli-writing-files-to-disk-under-postgresql/
 
 Table of Contents
 -----------------

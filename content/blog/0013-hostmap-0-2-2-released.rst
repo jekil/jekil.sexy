@@ -6,7 +6,7 @@ hostmap 0.2.2 released
 :tags: discovery, dns enumeration, dns name, virtual host
 :slug: hostmap-0-2-2-released
 :status: published
-:admin: /tools/hostmap-0-2-2-released
+:admin: /tools/hostmap-0-2-2-released/
 
 | I am glad to release hostmap version 0.2.2.
 | In this version there are a lot of bug fixes and some new features.

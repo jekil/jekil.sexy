@@ -6,7 +6,7 @@ How to setup an Image Forensic lab with Ghiro
 :tags: appliance, ghiro, image forensics
 :slug: how-to-setup-an-image-forensic-lab-with-ghiro
 :status: published
-:alias: /tools/how-to-setup-an-image-forensic-lab-with-ghiro
+:alias: /tools/how-to-setup-an-image-forensic-lab-with-ghiro/
 
 This how to will guide you through the setup of an **Image Forensics**
 lab, using `Ghiro <http://getghiro.org>`__, a free and open source image

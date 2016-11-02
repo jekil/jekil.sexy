@@ -6,7 +6,7 @@ DEFCON 18 CTF quals - Forensic 100 writeup
 :tags: CTF, DEFCON, quals
 :slug: defcon-18-ctf-quals-forensic-100-writeup
 :status: published
-:alias: /forensic/defcon-18-ctf-quals-forensic-100-writeup
+:alias: /forensic/defcon-18-ctf-quals-forensic-100-writeup/
 
 Some times ago i get a lot of fun at **DEFCON 18 CTF qualifications**
 with a group of really skilled friends. Now a bit later, here is my

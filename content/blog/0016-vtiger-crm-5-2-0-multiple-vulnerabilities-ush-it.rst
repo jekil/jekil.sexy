@@ -6,7 +6,7 @@ Vtiger CRM 5.2.0 Multiple Vulnerabilities @ Ush.it
 :tags: vtiger
 :slug: vtiger-crm-5-2-0-multiple-vulnerabilities-ush-it
 :status: published
-:alias: /advisory/vtiger-crm-5-2-0-multiple-vulnerabilities-ush-it
+:alias: /advisory/vtiger-crm-5-2-0-multiple-vulnerabilities-ush-it/
 
 With the `Ush.it <http://www.ush.it/>`__ team we published an advisory
 about “`Vtiger CRM 5.2.0 Multiple

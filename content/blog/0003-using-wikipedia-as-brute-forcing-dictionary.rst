@@ -6,7 +6,7 @@ Using Wikipedia as brute forcing dictionary
 :tags: brute forcer, brute forcing, dictionary, wikipedia, words
 :slug: using-wikipedia-as-brute-forcing-dictionary
 :status: published
-:alias: /blog/using-wikipedia-as-brute-forcing-dictionary
+:alias: /blog/using-wikipedia-as-brute-forcing-dictionary/
 
 The success and the time elapsed in a `brute forcing
 attack <http://en.wikipedia.org/wiki/Brute_force_attack>`__ depends by

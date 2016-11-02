@@ -6,7 +6,7 @@ Ghiro 0.2 preview video
 :tags: ghiro, image forensics
 :slug: ghiro-0-2-preview-video
 :status: published
-:alias: /tools/ghiro-0-2-preview-video
+:alias: /tools/ghiro-0-2-preview-video/
 
 We are really close to the next
 `Ghiro <http://www.getghiro.org/>`__ release, so we put together a

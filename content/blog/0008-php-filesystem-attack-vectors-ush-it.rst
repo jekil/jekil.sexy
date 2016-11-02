@@ -6,7 +6,7 @@ PHP Filesystem Attack Vectors @ Ush.it
 :tags: attack vector, filesystem, PHP
 :slug: php-filesystem-attack-vectors-ush-it
 :status: published
-:alias: /paper/php-filesystem-attack-vectors-ush-it
+:alias: /paper/php-filesystem-attack-vectors-ush-it/
 
 The `Ush.it <http://www.ush.it>`__ team published the second part of
 "`PHP Filesystem Attack

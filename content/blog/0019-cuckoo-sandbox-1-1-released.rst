@@ -6,7 +6,7 @@ Cuckoo Sandbox 1.1 released
 :tags: cuckoo
 :slug: cuckoo-sandbox-1-1-released
 :status: published
-:alias: /tools/cuckoo-sandbox-1-1-released
+:alias: /tools/cuckoo-sandbox-1-1-released/
 
 In past days we released `Cuckoo Sandbox
 1.1 <http://cuckoosandbox.org/2014-04-07-cuckoo-sandbox-11.html>`__, you

@@ -6,7 +6,7 @@ This OVF package requires unsupported hardware
 :tags: sysadmin, virtualbox
 :slug: this-ovf-package-requires-unsupported-hardware
 :status: published
-:alias: /blog/this-ovf-package-requires-unsupported-hardware
+:alias: /blog/this-ovf-package-requires-unsupported-hardware/
 
 I was trying to import a virtual image in **OVA** format inside a Vmware
 **ESXi** (or

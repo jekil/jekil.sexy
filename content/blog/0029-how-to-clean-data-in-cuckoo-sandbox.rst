@@ -6,7 +6,7 @@ How to clean data in Cuckoo Sandbox
 :tags: cuckoo
 :slug: how-to-clean-data-in-cuckoo-sandbox
 :status: published
-:alias: /tools/how-to-clean-data-in-cuckoo-sandbox
+:alias: /tools/how-to-clean-data-in-cuckoo-sandbox/
 
 Starting with `Cuckoo Sandbox <http://cuckoosandbox.org/>`__ 1.2, which
 will be released soon, the old data cleanup tool will be deprecated in

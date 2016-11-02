@@ -6,7 +6,7 @@ hostmap 0.2 released
 :tags: hostmap, virtual host
 :slug: hostmap-0-2-released
 :status: published
-:alias: /tools/hostmap-0-2-released
+:alias: /tools/hostmap-0-2-released/
 
 I am glad to release hostmap version 0.2.
 

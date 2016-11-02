@@ -6,7 +6,7 @@ Nginx, Varnish, Cherokee, thttpd, mini-httpd, WEBrick, Orion, AOLserver, Yaws an
 :tags: injection, log escape, log escape sequence injection
 :slug: nginx-varnish-cherokee-thttpd-mini-httpd-webrick-orion-aolserver-yaws-and-boa-log-escape-sequence-injection-ush-it
 :status: published
-:alias: /advisory/nginx-varnish-cherokee-thttpd-mini-httpd-webrick-orion-aolserver-yaws-and-boa-log-escape-sequence-injection-ush-it
+:alias: /advisory/nginx-varnish-cherokee-thttpd-mini-httpd-webrick-orion-aolserver-yaws-and-boa-log-escape-sequence-injection-ush-it/
 
 With the `Ush.it <http://www.ush.it/>`__ team we published an advisory
 about “\ `Nginx, Varnish, Cherokee, thttpd, mini-httpd, WEBrick, Orion,

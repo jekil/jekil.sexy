@@ -6,7 +6,7 @@ Such Cuckoo, much sandbox: dogeon report
 :tags: cuckoo, doge
 :slug: such-cuckoo-much-sandbox-dogeon-report
 :status: published
-:alias: /tools/such-cuckoo-much-sandbox-dogeon-report
+:alias: /tools/such-cuckoo-much-sandbox-dogeon-report/
 
 Several days ago I discovered one of the best projects of this year:
 `dogeon <http://dogeon.org/>`__.

@@ -6,7 +6,7 @@ Bringing up VirtualBox interface before starting Cuckoo
 :tags: cuckoo, virtualbox
 :slug: bringing-up-virtualbox-interface-before-starting-cuckoo
 :status: published
-:alias: /tools/bringing-up-virtualbox-interface-before-starting-cuckoo
+:alias: /tools/bringing-up-virtualbox-interface-before-starting-cuckoo/
 
 I am getting older and I need to write down commands I use rarely.
 

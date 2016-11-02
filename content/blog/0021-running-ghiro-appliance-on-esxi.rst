@@ -6,7 +6,7 @@ Running Ghiro appliance on ESXi
 :tags: ghiro
 :slug: running-ghiro-appliance-on-esxi
 :status: published
-:alias: /tools/running-ghiro-appliance-on-esxi
+:alias: /tools/running-ghiro-appliance-on-esxi/
 
 `Ghiro <http://www.getghiro.org>`__ is a nice digital image forensics
 tool (ok it is self promotion..) and it comes as appliance too, this is

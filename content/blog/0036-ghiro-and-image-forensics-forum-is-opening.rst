@@ -6,7 +6,7 @@ Ghiro and Image Forensics Forum is opening
 :tags: ghiro, image forensics
 :slug: ghiro-and-image-forensics-forum-is-opening
 :status: published
-:alias: /blog/ghiro-and-image-forensics-forum-is-opening
+:alias: /blog/ghiro-and-image-forensics-forum-is-opening/
 
 `Ghiro <http://getghiro.org>`__ is an open source project and it is
 driven by community needs: users feedback has a great value for us.

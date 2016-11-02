@@ -6,7 +6,7 @@ DEFCON 18 CTF quals - Forensic 200 writeup
 :tags: CTF, DEFCON, quals
 :slug: defcon-18-ctf-quals-forensic-200-writeup
 :status: published
-:alias: /forensic/defcon-18-ctf-quals-%e2%80%93-forensic-200-writeup
+:alias: /forensic/defcon-18-ctf-quals-%e2%80%93-forensic-200-writeup/
 
 Second forensic challange of the DEFCON 18 CTF qualifications: the
 suggestion was “\ *find the key*\ ” and the related file is

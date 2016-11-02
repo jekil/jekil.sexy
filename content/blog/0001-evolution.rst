@@ -6,7 +6,7 @@ Evolution
 :tags: evolution, lab, lonerunners.net
 :slug: evolution
 :status: published
-:alias: /blog/evolution
+:alias: /blog/evolution/
 
 `lonerunners.net <http://www.lonerunners.net>`__ is a blog composed by
 all kind of my crap, cinema, personal facts, technology news and IT

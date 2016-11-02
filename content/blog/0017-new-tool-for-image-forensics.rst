@@ -6,7 +6,7 @@ New tool for image forensics
 :tags: image forensics, photo forensics
 :slug: new-tool-for-image-forensics
 :status: published
-:alias: /forensic/new-tool-for-image-forensics
+:alias: /forensic/new-tool-for-image-forensics/
 
 | Images contained tons of information also known as metadata. I
   published a simple tool which extracts these information from provided

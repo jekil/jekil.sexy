@@ -6,7 +6,7 @@ Continuous Integration Services I Like
 :tags: CI, development
 :slug: continuous-integration-services-i-like
 :status: published
-:alias: /blog/continuous-integration-services-i-like
+:alias: /blog/continuous-integration-services-i-like/
 
 The term **"continuous integration (CI)"** refers to a process that
 builds, assess and tests code on a frequent basis.

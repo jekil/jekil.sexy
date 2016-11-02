@@ -6,7 +6,7 @@ Binary data fetching through SQLi
 :tags: binary data, blob, data casting, SQL Injection
 :slug: binary-data-fetching-through-sqli
 :status: published
-:alias: /paper/binary-data-fetching-through-sqli
+:alias: /paper/binary-data-fetching-through-sqli/
 
 Table of contents
 -----------------
