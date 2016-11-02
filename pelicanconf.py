@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from datetime import date
 
 AUTHOR = u'Alessandro Tanasi'
-SITENAME = u"jekil's blog"
-SITETITLE = SITENAME
+SITENAME = u"Alessandro Tanasi @jekil's blog"
+SITETITLE = u"jekil's blog"
 SITESUBTITLE = u"%s's thoughts" % AUTHOR
 SITEDESCRIPTION = '%s\'s Thoughts and Writings' % AUTHOR
 SITELOGO = '//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120'
