@@ -23,5 +23,5 @@ ADD_THIS_ID = 'ra-581885fa6aad787e'
 GOOGLE_ANALYTICS = 'UA-2317228-19'
 #GOOGLE_TAG_MANAGER = ''
 #STATUSCAKE = { 'trackid': 'your-id', 'days': 7, 'design': 6, 'rumid': 1234 }
-PIWIK_URL = "https://stats.lonerunners.net"
+PIWIK_URL = "stats.lonerunners.net"
 PIWIK_SITE_ID = 1
