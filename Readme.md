@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jekil/jekil.sexy.svg?branch=master)](https://travis-ci.org/jekil/jekil.sexy)
+
 Jekil.sexy
 ----------
 
