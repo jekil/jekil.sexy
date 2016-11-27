@@ -28,12 +28,13 @@ BROWSER_COLOR = '#333'
 PYGMENTS_STYLE = 'github'
 TYPOGRIFY = True
 SUMMARY_MAX_LENGTH = 100
+#DOCUTILS_SETTINGS = {'doctitle_xform': False }
 
 # Locals.
 TIMEZONE = 'Europe/London'
 DEFAULT_LANG = u'en'
-OG_LOCALE = 'en_US'
-LOCALE = 'en_US'
+OG_LOCALE = 'en_US.UTF-8'
+LOCALE = 'en_US.UTF-8'
 DATE_FORMATS = {
     'en': '%B %d, %Y',
 }
