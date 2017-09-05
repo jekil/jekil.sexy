@@ -6,3 +6,4 @@ lxml==3.6.4
 ghp-import==0.4.1
 pelican-alias==1.1
 pelican-youtube==0.2.0
+docutils
