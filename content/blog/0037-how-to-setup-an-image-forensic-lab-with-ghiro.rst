@@ -83,7 +83,7 @@ window and click **Settings.**
 
 |Screen Shot 2015-08-19 at 01.51.03|
 
-Then choose the **Network ** tab.
+Then choose the **Network** tab.
 
 |Screen Shot 2015-08-19 at 01.51.52|
 
