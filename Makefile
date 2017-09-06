@@ -12,10 +12,10 @@ FTP_HOST=localhost
 FTP_USER=anonymous
 FTP_TARGET_DIR=/
 
-SSH_HOST=localhost
-SSH_PORT=22
+SSH_HOST=passera.lonerunners.net
+SSH_PORT=22022
 SSH_USER=root
-SSH_TARGET_DIR=/var/www
+SSH_TARGET_DIR=/htdocs/jekil.sexy/src/output/
 
 S3_BUCKET=my_s3_bucket
 
