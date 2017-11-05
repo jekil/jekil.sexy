@@ -26,5 +26,5 @@ To deploy new content:
 
 * Create new content
 * Commit & push (for the sake of vcs)
-* make rsync_upload
+* LC_ALL=en_US.UTF-8 make rsync_upload
 
