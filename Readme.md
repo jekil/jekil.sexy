@@ -6,3 +6,25 @@ Jekil.sexy
 ----------
 
 This repository is the source code of [jekil.sexy](https://jekil.sexy), my personal blog.
+
+
+Setup
+=====
+
+Requirements:
+
+    apt-get install python-dev libxml2-dev libxslt1-dev zlib1g-dev python-virtualenv pyhton-pip
+
+Blog setup:
+
+    pip install -r requirements.txt 
+
+Deploy
+======
+
+To deploy new content:
+
+* Create new content
+* Commit & push (for the sake of vcs)
+* make rsync_upload
+
