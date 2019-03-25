@@ -1,3 +1,7 @@
+# Set encoding for macos.
+LC_ALL=en_US.UTF-8
+LANG=en_US.UTF-8
+
 PY?=python
 PELICAN?=pelican
 PELICANOPTS=
@@ -17,7 +21,7 @@ SSH_PORT=22022
 SSH_USER=root
 SSH_TARGET_DIR=/htdocs/jekil.sexy/src/output/
 
-S3_BUCKET=my_s3_bucket
+S3_BUCKET=jekil.sexy
 
 CLOUDFILES_USERNAME=my_rackspace_username
 CLOUDFILES_API_KEY=my_rackspace_api_key
@@ -115,7 +119,8 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 s3_upload: publish
-	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type
+	#s3cmd -v -d  sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type
+	aws s3 sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --delete --exclude ".DS_Store" --exact-timestamps --acl public-read
 
 cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
