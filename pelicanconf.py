@@ -76,6 +76,7 @@ SOCIAL = (('envelope-o', 'mailto:alessandro@tanasi.it'),
           ('linkedin', 'https://www.linkedin.com/in/alessandrotanasi'),
           ('github', 'https://github.com/jekil'),
           ('twitter', 'https://twitter.com/jekil'),
+          ('instagram', 'https://www.instagram.com/jekilcoso/'),
           ('rss', 'http://feeds.feedburner.com/jekil_is_sexy'),
           )
 TWITTER_USERNAME = 'jekil'
