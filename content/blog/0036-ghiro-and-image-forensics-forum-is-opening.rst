@@ -32,8 +32,8 @@ Enyoj! \ https://forum.getghiro.org
 
 |This is relevant to my interests|
 
-.. |This is relevant to my interests| image:: {filename}/images/2015/08/eab.jpg
+.. |This is relevant to my interests| image:: {static}/images/2015/08/eab.jpg
    :width: 300px
    :height: 235px
-   :target: {filename}/images/2015/08/eab.jpg
+   :target: {static}/images/2015/08/eab.jpg
    :class: img-center

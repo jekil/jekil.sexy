@@ -11,6 +11,6 @@ You can also use "Back" button in your browser to go back, or simply go to the `
 
 |Page not found|
 
-.. |Page not found| image:: {filename}/static/images/404.jpg
-   :target: {filename}/static/images/404.jpg
+.. |Page not found| image:: {static}/static/images/404.jpg
+   :target: {static}/static/images/404.jpg
    :class: img-center

@@ -13,7 +13,7 @@ about “`Vtiger CRM 5.2.0 Multiple
 Vulnerabilities <http://www.ush.it/2010/11/16/vtiger-crm-520-multiple-vulnerabilities/>`__”.
 The original
 is `here <http://www.ush.it/2010/11/16/vtiger-crm-520-multiple-vulnerabilities/>`__
-and you can download it `here <{filename}/public/advisory/hack-vtigercrm_520-2010/vtigercrm_520.txt>`__.
+and you can download it `here <{static}/public/advisory/hack-vtigercrm_520-2010/vtigercrm_520.txt>`__.
 
 .. code-block:: text
 

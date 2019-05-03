@@ -133,63 +133,63 @@ Now login in your browser with the same credentials and you will be ready to pla
 `forum <https://forum.getghiro.org>`__ or `mailing
 list <https://groups.google.com/d/forum/ghiro>`__.
 
-.. |Screen Shot 2015-08-19 at 01.38.55| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.38.55.png
+.. |Screen Shot 2015-08-19 at 01.38.55| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.38.55.png
    :width: 246px
    :height: 126px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.38.55.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.38.55.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.44.05| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.44.05.png
+.. |Screen Shot 2015-08-19 at 01.44.05| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.44.05.png
    :width: 882px
    :height: 750px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.44.05.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.44.05.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.45.25| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.45.25.png
+.. |Screen Shot 2015-08-19 at 01.45.25| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.45.25.png
    :width: 882px
    :height: 750px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.45.25.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.45.25.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.46.42| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.46.42.png
+.. |Screen Shot 2015-08-19 at 01.46.42| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.46.42.png
    :width: 882px
    :height: 750px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.46.42.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.46.42.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.47.14| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.47.14.png
+.. |Screen Shot 2015-08-19 at 01.47.14| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.47.14.png
    :width: 882px
    :height: 750px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.47.14.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.47.14.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.49.26| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.49.26.png
+.. |Screen Shot 2015-08-19 at 01.49.26| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.49.26.png
    :width: 882px
    :height: 750px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.49.26.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.49.26.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.51.03| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.03.png
+.. |Screen Shot 2015-08-19 at 01.51.03| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.03.png
    :width: 854px
    :height: 722px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.03.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.03.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.51.52| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.52.png
+.. |Screen Shot 2015-08-19 at 01.51.52| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.52.png
    :width: 854px
    :height: 722px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.52.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.51.52.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 01.54.17| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.54.17.png
+.. |Screen Shot 2015-08-19 at 01.54.17| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.54.17.png
    :width: 724px
    :height: 607px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-01.54.17.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-01.54.17.png
    :class: img-center
-.. |appliance_15| image:: {filename}/images/2015/08/appliance_15.png
+.. |appliance_15| image:: {static}/images/2015/08/appliance_15.png
    :width: 752px
    :height: 635px
-   :target: {filename}/images/2015/08/appliance_15.png
+   :target: {static}/images/2015/08/appliance_15.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 23.42.56| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-23.42.56.png
+.. |Screen Shot 2015-08-19 at 23.42.56| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-23.42.56.png
    :width: 660px
    :height: 431px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-23.42.56.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-23.42.56.png
    :class: img-center
-.. |Screen Shot 2015-08-19 at 23.44.30| image:: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-23.44.30.png
+.. |Screen Shot 2015-08-19 at 23.44.30| image:: {static}/images/2015/08/Screen-Shot-2015-08-19-at-23.44.30.png
    :width: 660px
    :height: 431px
-   :target: {filename}/images/2015/08/Screen-Shot-2015-08-19-at-23.44.30.png
+   :target: {static}/images/2015/08/Screen-Shot-2015-08-19-at-23.44.30.png
    :class: img-center

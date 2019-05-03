@@ -93,23 +93,23 @@ For example, this is the build report you get for
 |Screen Shot 2015-07-16 at 23.57.36|
 
  
-.. |Screen Shot 2015-07-16 at 23.52.44| image:: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-23.52.44.png
+.. |Screen Shot 2015-07-16 at 23.52.44| image:: {static}/images/2015/07/Screen-Shot-2015-07-16-at-23.52.44.png
    :width: 300px
    :height: 62px
-   :target: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-23.52.44.png
+   :target: {static}/images/2015/07/Screen-Shot-2015-07-16-at-23.52.44.png
    :class: img-center
-.. |Screen Shot 2015-07-16 at 23.07.53| image:: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-23.07.53.png
+.. |Screen Shot 2015-07-16 at 23.07.53| image:: {static}/images/2015/07/Screen-Shot-2015-07-16-at-23.07.53.png
    :width: 300px
    :height: 117px
-   :target: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-23.07.53.png
+   :target: {static}/images/2015/07/Screen-Shot-2015-07-16-at-23.07.53.png
    :class: img-center
-.. |Screen Shot 2015-07-16 at 22.49.09| image:: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-22.49.09.png
+.. |Screen Shot 2015-07-16 at 22.49.09| image:: {static}/images/2015/07/Screen-Shot-2015-07-16-at-22.49.09.png
    :width: 300px
    :height: 209px
-   :target: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-22.49.09.png
+   :target: {static}/images/2015/07/Screen-Shot-2015-07-16-at-22.49.09.png
    :class: img-center
-.. |Screen Shot 2015-07-16 at 23.57.36| image:: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-23.57.36.png
+.. |Screen Shot 2015-07-16 at 23.57.36| image:: {static}/images/2015/07/Screen-Shot-2015-07-16-at-23.57.36.png
    :width: 300px
    :height: 280px
-   :target: {filename}/images/2015/07/Screen-Shot-2015-07-16-at-23.57.36.png
+   :target: {static}/images/2015/07/Screen-Shot-2015-07-16-at-23.57.36.png
    :class: img-center

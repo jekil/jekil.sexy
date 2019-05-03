@@ -13,7 +13,7 @@ about “\ `Nginx, Varnish, Cherokee, thttpd, mini-httpd, WEBrick, Orion,
 AOLserver, Yaws and Boa log escape sequence
 injection <http://www.ush.it/2010/01/11/nginx-varnish-cherokee-thttpd-mini-httpd-webrick-orion-aolserver-yaws-and-boa-log-escape-sequence-injection/>`__\ ”.
 The original post
-is `here <http://www.ush.it/2010/01/11/nginx-varnish-cherokee-thttpd-mini-httpd-webrick-orion-aolserver-yaws-and-boa-log-escape-sequence-injection/>`__ and can be downloaded from `here <{filename}/public/advisory/hack_httpd_escape-2010/adv.txt>`__.
+is `here <http://www.ush.it/2010/01/11/nginx-varnish-cherokee-thttpd-mini-httpd-webrick-orion-aolserver-yaws-and-boa-log-escape-sequence-injection/>`__ and can be downloaded from `here <{static}/public/advisory/hack_httpd_escape-2010/adv.txt>`__.
 
 .. code-block:: text
 

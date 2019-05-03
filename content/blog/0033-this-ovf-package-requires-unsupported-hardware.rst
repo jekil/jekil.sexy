@@ -95,8 +95,8 @@ file a substitute the present hash with the calculated one.
 
 Now all should work.
 
-.. |20130530152156| image:: {filename}/images/2015/03/20130530152156.jpg
+.. |20130530152156| image:: {static}/images/2015/03/20130530152156.jpg
    :width: 300px
    :height: 155px
-   :target: {filename}/images/2015/03/20130530152156.jpg
+   :target: {static}/images/2015/03/20130530152156.jpg
    :class: img-center

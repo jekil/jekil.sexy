@@ -15,7 +15,7 @@ other times I `code <https://github.com/jekil>`__ for beers, sometimes I
 `tweet <https://twitter.com/jekil>`__.
 
 You can connect with me writing to `alessandro@tanasi.it <mailto:alessandro@tanasi.it>`__,
-an `encrypted <https://emailselfdefense.fsf.org/en/>`__ email is really appreciated, my `GPG key <{filename}/public/jekil-keys/D8A1E49A.asc>`__
+an `encrypted <https://emailselfdefense.fsf.org/en/>`__ email is really appreciated, my `GPG key <{static}/public/jekil-keys/D8A1E49A.asc>`__
 fingerprint is:
 
 ..

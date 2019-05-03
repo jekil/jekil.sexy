@@ -12,7 +12,7 @@ The `Ush.it <http://www.ush.it>`__ team published the second part of
 "`PHP Filesystem Attack
 Vectors <http://www.ush.it/2009/02/08/php-filesystem-attack-vectors/>`__"
 paper. The original paper
-is available `here <http://www.ush.it/2009/07/26/php-filesystem-attack-vectors-take-two/>`__ and you can download it `here <{filename}/public/advisory/phpfs_mad-2009/phpfs_mad_2.txt>`__.
+is available `here <http://www.ush.it/2009/07/26/php-filesystem-attack-vectors-take-two/>`__ and you can download it `here <{static}/public/advisory/phpfs_mad-2009/phpfs_mad_2.txt>`__.
 
 .. code-block:: text
 

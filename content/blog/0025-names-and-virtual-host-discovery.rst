@@ -11,7 +11,7 @@ Names and virtual host discovery
 Short speech about "Names and virtual host discovery" at
 `ESC <http://endsummercamp.org>`__ 2014, a basic task during the
 information gathering phase of your pen test. You can download slides
-in `PDF <{filename}/public/docs/slides/names_and_virtual_host_discovery-esc2014/Virtual%20host%20discovery%20-%20ESC%202014.pdf>`__ too.
+in `PDF <{static}/public/docs/slides/names_and_virtual_host_discovery-esc2014/Virtual%20host%20discovery%20-%20ESC%202014.pdf>`__ too.
 
 .. raw:: html
 
