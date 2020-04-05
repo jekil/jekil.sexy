@@ -51,6 +51,7 @@ EXTRA_PATH_METADATA = {
     'static/robots.txt': {'path': 'robots.txt'},
     'static/favicon.ico': {'path': 'favicon.ico'},
     'static/CNAME': {'path': 'CNAME'},
+    'static/.well-known/security.txt': {'path': '.well-known/security.txt'},
 }
 DEFAULT_METADATA = {
     'status': 'draft',
