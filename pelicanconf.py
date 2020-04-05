@@ -46,6 +46,7 @@ USE_LESS = True
 
 # Blog conf.
 MAIN_MENU = True
+LINKS_IN_NEW_TAB = 'external'
 USE_FOLDER_AS_CATEGORY = False
 EXTRA_PATH_METADATA = {
     'static/robots.txt': {'path': 'robots.txt'},
