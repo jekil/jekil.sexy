@@ -3,7 +3,7 @@ Homemade custom interaction DNS honeypot
 :date: 2014-04-02 20:30
 :author: jekil
 :category: Tools
-:tags: dns, honeypot
+:tags: honeypot, udpot
 :slug: homemade-custom-interaction-dns-honeypot
 :status: published
 :alias: /tools/homemade-custom-interaction-dns-honeypot/
