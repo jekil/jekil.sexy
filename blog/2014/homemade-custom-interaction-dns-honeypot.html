@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="jekil" />
+<meta name="description" content="Time ago I needed a weird DNS honeypot with “some” level of interaction. I mean an honeypot which acts as a real DNS server, sending out DNS replies  for the first bunch of requests, and after it work as a sinkhole. I did it in Python and Twisted,  named it with the worst name I was able to catch and published it on Github. I hope all setup steps are documented in README.md, anyway here is a quick recap. Check it out from Github and create a virtualenv (you have to install it for example with apt-get install python-virtualenv …" />
+<meta name="keywords" content="honeypot, udpot">
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:title" content="Homemade custom interaction DNS honeypot"/>
+<meta property="og:description" content="Time ago I needed a weird DNS honeypot with “some” level of interaction. I mean an honeypot which acts as a real DNS server, sending out DNS replies  for the first bunch of requests, and after it work as a sinkhole. I did it in Python and Twisted,  named it with the worst name I was able to catch and published it on Github. I hope all setup steps are documented in README.md, anyway here is a quick recap. Check it out from Github and create a virtualenv (you have to install it for example with apt-get install python-virtualenv …"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy/blog/2014/homemade-custom-interaction-dns-honeypot.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2014-04-02 20:30:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jekil.sexy/author/jekil.html">
+<meta property="article:section" content="Tools"/>
+<meta property="article:tag" content="honeypot"/>
+<meta property="article:tag" content="udpot"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash; Homemade custom interaction DNS honeypot</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="homemade-custom-interaction-dns-honeypot">Homemade custom interaction <span class="caps">DNS</span>&nbsp;honeypot</h1>
+    <p>
+          Posted on April 02, 2014 in <a href="https://jekil.sexy/category/tools.html">Tools</a>
+
+
+        &#8226; 2 min read
+    </p>
+  </header>
+  <div>
+    <div class="line-block">
+<div class="line">Time ago I needed a weird <span class="caps">DNS</span> honeypot with &#8220;some&#8221; level of
+interaction.</div>
+<div class="line">I mean an honeypot which acts as a real <span class="caps">DNS</span> server, sending out <span class="caps">DNS</span>
+replies &nbsp;for the first bunch of requests, and after it work as a
+sinkhole.</div>
+<div class="line">I did it in Python and <a class="reference external" href="https://twistedmatrix.com/trac/">Twisted</a>,
+&nbsp;named it with the worst name I was able to catch and published it on
+<a class="reference external" href="https://github.com/jekil/UDPot">Github</a>.</div>
+</div>
+<p>I hope all setup steps are documented
+in&nbsp;<a class="reference external" href="https://github.com/jekil/UDPot/blob/master/README.md"><span class="caps">README</span>.md</a>,
+anyway here is a quick&nbsp;recap.</p>
+<p>Check it out from&nbsp;<a class="reference external" href="https://github.com/jekil/UDPot">Github</a>&nbsp;and
+create a virtualenv (you have to install it for example with apt-get
+install&nbsp;python-virtualenv):</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/jekil/UDPot.git
+<span class="gp">$</span> virtualenv ve_udpot
+</pre></div>
+<p>Enter in the virtualenv and in the application&nbsp;folder:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">source</span> ve_udpot/bin/activate
+<span class="gp">$</span> <span class="nb">cd</span> UDPot
+</pre></div>
+<p>Setup all requirements (you need python headers, you can install it with
+apt-get&nbsp;python-dev):</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> pip install -r requirements.txt
+</pre></div>
+<p>You can print the option list using the help -h&nbsp;option:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> python dns.py -h
+<span class="go">usage: dns.py [-h] [-p DNS_PORT] [-c REQ_COUNT] [-t REQ_TIMEOUT] [-s] [-v] server</span>
+
+<span class="go">positional arguments:</span>
+<span class="go">  server                DNS server IP address</span>
+
+<span class="go">optional arguments:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -p DNS_PORT, --dns-port DNS_PORT</span>
+<span class="go">                        DNS honeypot port</span>
+<span class="go">  -c REQ_COUNT, --req-count REQ_COUNT</span>
+<span class="go">                        how many request to resolve</span>
+<span class="go">  -t REQ_TIMEOUT, --req-timeout REQ_TIMEOUT</span>
+<span class="go">                        how many request to resolve</span>
+<span class="go">  -s, --sql             database connection string</span>
+<span class="go">  -v, --verbose         print each request</span>
+</pre></div>
+<p>And run the <span class="caps">DNS</span> honeypot using options you like,&nbsp;as:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> python dns.py -v <span class="m">8</span>.8.8.8
+</pre></div>
+<p>Dns.py binds on port 5053, to reply on requests on port 53 without
+running dns.py as root you need some iptables&nbsp;magic:</p>
+<div class="highlight"><pre><span></span><span class="gp">#</span> iptables -t nat -A PREROUTING -i eth0 -p tcp --dport <span class="m">53</span> -j REDIRECT --to-ports <span class="m">5053</span>
+<span class="gp">#</span> iptables -t nat -A PREROUTING -i eth0 -p udp --dport <span class="m">53</span> -j REDIRECT --to-ports <span class="m">5053</span>
+</pre></div>
+<p>Honeypot data can be printed on stdout with -v option or you can read
+them in sqlite&nbsp;database:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> sqlite3 db.sqlite3
+<span class="go">SQLite version 3.7.13 2012-06-11 02:05:22</span>
+<span class="go">Enter &quot;.help&quot; for instructions</span>
+<span class="go">Enter SQL statements terminated with a &quot;;&quot;</span>
+<span class="go">sqlite&gt; SELECT * FROM __main___dns;</span>
+
+
+<span class="go">1|94.23.212.82|30789|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:43.378744</span>
+<span class="go">2|94.23.212.82|30789|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:43.374297</span>
+<span class="go">3|94.23.212.82|30789|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:43.370550</span>
+<span class="go">4|94.23.212.82|30789|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:43.366275</span>
+<span class="go">5|94.23.212.82|30789|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:43.358958</span>
+<span class="go">6|94.23.212.82|37820|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:32.104334</span>
+<span class="go">7|94.23.212.82|37820|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:32.099354</span>
+<span class="go">8|94.23.212.82|37820|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:32.094711</span>
+<span class="go">9|94.23.212.82|37820|ahuyehue.info|ALL_RECORDS|IN|2014-04-02 10:35:32.086916</span>
+</pre></div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jekil.sexy/tag/honeypot.html">honeypot</a>
+      <a href="https://jekil.sexy/tag/udpot.html">udpot</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jekilsexy';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

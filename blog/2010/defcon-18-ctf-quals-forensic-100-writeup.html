@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="jekil" />
+<meta name="description" content="Some times ago i get a lot of fun at DEFCON 18 CTF qualifications with a group of really skilled friends. Now a bit later, here is my writeup for some challenges. First forensic challange of the DEFCON 18 CTF qualifications: the suggestion was “find the key” and the related file is here. (Mirrors: #1, #2) $ file f100_6db079ca91c4860f.bin f100_6db079ca91c4860f.bin: x86 boot sector; partition 1: ID=0x7, starthead 0, startsector 31, 31558 sectors, extended partition table (last)11, code offset 0x0 Now take a look at the partition table. $ xxd -l 512 f100_6db079ca91c4860f.bin 0000000: 0000 0000 0000 0000 …" />
+<meta name="keywords" content="CTF, DEFCON, quals">
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:title" content="DEFCON 18 CTF quals - Forensic 100 writeup"/>
+<meta property="og:description" content="Some times ago i get a lot of fun at DEFCON 18 CTF qualifications with a group of really skilled friends. Now a bit later, here is my writeup for some challenges. First forensic challange of the DEFCON 18 CTF qualifications: the suggestion was “find the key” and the related file is here. (Mirrors: #1, #2) $ file f100_6db079ca91c4860f.bin f100_6db079ca91c4860f.bin: x86 boot sector; partition 1: ID=0x7, starthead 0, startsector 31, 31558 sectors, extended partition table (last)11, code offset 0x0 Now take a look at the partition table. $ xxd -l 512 f100_6db079ca91c4860f.bin 0000000: 0000 0000 0000 0000 …"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy/blog/2010/defcon-18-ctf-quals-forensic-100-writeup.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2010-06-19 15:51:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jekil.sexy/author/jekil.html">
+<meta property="article:section" content="Blog"/>
+<meta property="article:tag" content="CTF"/>
+<meta property="article:tag" content="DEFCON"/>
+<meta property="article:tag" content="quals"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash; DEFCON 18 CTF quals - Forensic 100 writeup</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="defcon-18-ctf-quals-forensic-100-writeup"><span class="caps">DEFCON</span> 18 <span class="caps">CTF</span> quals - Forensic 100&nbsp;writeup</h1>
+    <p>
+          Posted on June 19, 2010 in <a href="https://jekil.sexy/category/blog.html">Blog</a>
+
+
+        &#8226; 6 min read
+    </p>
+  </header>
+  <div>
+    <p>Some times ago i get a lot of fun at <strong><span class="caps">DEFCON</span> 18 <span class="caps">CTF</span> qualifications</strong>
+with a group of really skilled friends. Now a bit later, here is my
+writeup for some&nbsp;challenges.</p>
+<p>First forensic challange of the <span class="caps">DEFCON</span> 18 <span class="caps">CTF</span> qualifications: the
+suggestion was &#8220;<em>find the key</em>&#8221; and the related file is
+<a class="reference external" href="http://squidzrus.schleppingsquid.net/DC18-Qual-Walks/f100_6db079ca91c4860f.bin">here</a>.
+(Mirrors:
+<a class="reference external" href="http://stalkr.net/files/defcon/2010/quals/forensics100/f100_6db079ca91c4860f.bin.gz">#1</a>,
+<a class="reference external" href="http://n.pentest.jp/ctf2010/f100_6db079ca91c4860f.bin">#2</a>)</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> file f100_6db079ca91c4860f.bin
+<span class="go">f100_6db079ca91c4860f.bin: x86 boot sector; partition 1: ID=0x7,</span>
+<span class="go">starthead 0, startsector 31, 31558 sectors, extended partition table</span>
+<span class="gp gp-VirtualEnv">(last)</span><span class="go">11, code offset 0x0</span>
+</pre></div>
+<p>Now take a look at the partition&nbsp;table.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> xxd -l <span class="m">512</span> f100_6db079ca91c4860f.bin
+<span class="go">0000000: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000010: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000030: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000040: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000050: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000080: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00000a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00000b0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00000c0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00000d0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00000e0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00000f0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000100: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000110: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000120: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000130: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000140: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000150: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000160: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000170: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000180: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">0000190: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00001a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00001b0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00001c0: 0101 0700 dffa 1f00 0000 467b 0000 0000  ..........F{....</span>
+<span class="go">00001d0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00001e0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span class="go">00001f0: 0000 0000 0000 0000 0000 0000 0000 55aa  ..............U.</span>
+
+<span class="gp">$</span> xxd -l <span class="m">512</span> -s <span class="m">15872</span> f100_6db079ca91c4860f.bin
+<span class="go">0003e00: eb52 904e 5446 5320 2020 2000 0208 0000  .R.NTFS    .....</span>
+<span class="go">0003e10: 0000 0000 00f8 0000 3f00 ff00 1f00 0000  ........?.......</span>
+<span class="go">0003e20: 0000 0000 8000 0000 457b 0000 0000 0000  ........E{......</span>
+<span class="go">0003e30: 2205 0000 0000 0000 0200 0000 0000 0000  &quot;...............</span>
+<span class="go">0003e40: f600 0000 0100 0000 631f 85d4 4885 d422  ........c...H..&quot;</span>
+<span class="go">0003e50: 0000 0000 fa33 c08e d0bc 007c fb68 c007  .....3.....|.h..</span>
+<span class="go">0003e60: 1f1e 6866 00cb 8816 0e00 6681 3e03 004e  ..hf......f.&gt;..N</span>
+<span class="go">0003e70: 5446 5375 15b4 41bb aa55 cd13 720c 81fb  TFSu..A..U..r...</span>
+<span class="go">0003e80: 55aa 7506 f7c1 0100 7503 e9dd 001e 83ec  U.u.....u.......</span>
+<span class="go">0003e90: 1868 1a00 b448 8a16 0e00 8bf4 161f cd13  .h...H..........</span>
+<span class="go">0003ea0: 9f83 c418 9e58 1f72 e13b 060b 0075 dba3  .....X.r.;...u..</span>
+<span class="go">0003eb0: 0f00 c12e 0f00 041e 5a33 dbb9 0020 2bc8  ........Z3... +.</span>
+<span class="go">0003ec0: 66ff 0611 0003 160f 008e c2ff 0616 00e8  f...............</span>
+<span class="go">0003ed0: 4b00 2bc8 77ef b800 bbcd 1a66 23c0 752d  K.+.w......f#.u-</span>
+<span class="go">0003ee0: 6681 fb54 4350 4175 2481 f902 0172 1e16  f..TCPAu$....r..</span>
+<span class="go">0003ef0: 6807 bb16 6870 0e16 6809 0066 5366 5366  h...hp..h..fSfSf</span>
+<span class="go">0003f00: 5516 1616 68b8 0166 610e 07cd 1a33 c0bf  U...h..fa....3..</span>
+<span class="go">0003f10: 2810 b9d8 0ffc f3aa e95f 0190 9066 601e  (........_...f`.</span>
+<span class="go">0003f20: 0666 a111 0066 0306 1c00 1e66 6800 0000  .f...f.....fh...</span>
+<span class="go">0003f30: 0066 5006 5368 0100 6810 00b4 428a 160e  .fP.Sh..h...B...</span>
+<span class="go">0003f40: 0016 1f8b f4cd 1366 595b 5a66 5966 591f  .......fY\[ZfYfY.</span>
+<span class="go">0003f50: 0f82 1600 66ff 0611 0003 160f 008e c2ff  ....f...........</span>
+<span class="go">0003f60: 0e16 0075 bc07 1f66 61c3 a0f8 01e8 0900  ...u...fa.......</span>
+<span class="go">0003f70: a0fb 01e8 0300 f4eb fdb4 018b f0ac 3c00  ..............&lt;.</span>
+<span class="go">0003f80: 7409 b40e bb07 00cd 10eb f2c3 0d0a 4120  t.............A</span>
+<span class="go">0003f90: 6469 736b 2072 6561 6420 6572 726f 7220  disk read error</span>
+<span class="go">0003fa0: 6f63 6375 7272 6564 000d 0a42 4f4f 544d  occurred...BOOTM</span>
+<span class="go">0003fb0: 4752 2069 7320 6d69 7373 696e 6700 0d0a  GR is missing...</span>
+<span class="go">0003fc0: 424f 4f54 4d47 5220 6973 2063 6f6d 7072  BOOTMGR is compr</span>
+<span class="go">0003fd0: 6573 7365 6400 0d0a 5072 6573 7320 4374  essed...Press Ct</span>
+<span class="go">0003fe0: 726c 2b41 6c74 2b44 656c 2074 6f20 7265  rl+Alt+Del to re</span>
+<span class="go">0003ff0: 7374 6172 740d 0a00 8ca9 bed6 0000 55aa  start.........U.</span>
+</pre></div>
+<p>Seems some sort of Windows image. Get a look at the full partition&nbsp;table.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> mmls f100_6db079ca91c4860f.bin
+<span class="go">DOS Partition Table</span>
+<span class="go">Offset Sector: 0</span>
+<span class="go">Units are in 512-byte sectors</span>
+
+<span class="go">Slot    Start        End          Length       Description</span>
+<span class="go">00:  Meta    0000000000   0000000000   0000000001   Primary Table</span>
+<span class="gp gp-VirtualEnv">(#0)</span>
+<span class="go">01:  -----   0000000000   0000000030   0000000031   Unallocated</span>
+<span class="go">02:  00:00   0000000031   0000031588   0000031558   NTFS (0x07)</span>
+<span class="go">03:  -----   0000031589   0000031615   0000000027   Unallocated</span>
+</pre></div>
+<p>Using these values we can extract the partitions with&nbsp;dd.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> dd <span class="k">if</span><span class="o">=</span>f100_6db079ca91c4860f.bin <span class="nv">of</span><span class="o">=</span>p0.bin <span class="nv">bs</span><span class="o">=</span><span class="m">512</span> <span class="nv">skip</span><span class="o">=</span><span class="m">0</span> <span class="nv">count</span><span class="o">=</span><span class="m">1</span>
+<span class="go">1+0 records in</span>
+<span class="go">1+0 records out</span>
+<span class="go">512 bytes (512 B) copied, 5.0705e-05 s, 10.1 MB/s</span>
+<span class="gp">$</span> dd <span class="k">if</span><span class="o">=</span>f100_6db079ca91c4860f.bin <span class="nv">of</span><span class="o">=</span>p1.bin <span class="nv">bs</span><span class="o">=</span><span class="m">512</span> <span class="nv">skip</span><span class="o">=</span><span class="m">0</span> <span class="nv">count</span><span class="o">=</span><span class="m">31</span>
+<span class="go">31+0 records in</span>
+<span class="go">31+0 records out</span>
+<span class="go">15872 bytes (16 kB) copied, 0.000218534 s, 72.6 MB/s</span>
+<span class="gp">$</span> dd <span class="k">if</span><span class="o">=</span>f100_6db079ca91c4860f.bin <span class="nv">of</span><span class="o">=</span>p2.bin <span class="nv">bs</span><span class="o">=</span><span class="m">512</span> <span class="nv">skip</span><span class="o">=</span><span class="m">31</span>
+<span class="go">31585+0 records in</span>
+<span class="go">31585+0 records out</span>
+<span class="go">16171520 bytes (16 MB) copied, 0.298363 s, 54.2 MB/s</span>
+<span class="gp">$</span> dd <span class="k">if</span><span class="o">=</span>f100_6db079ca91c4860f.bin <span class="nv">of</span><span class="o">=</span>p3.bin <span class="nv">bs</span><span class="o">=</span><span class="m">512</span> <span class="nv">skip</span><span class="o">=</span><span class="m">31589</span>
+<span class="go">27+0 records in</span>
+<span class="go">27+0 records out</span>
+<span class="go">13824 bytes (14 kB) copied, 0.000205892 s, 67.1 MB/s</span>
+</pre></div>
+<p>Now re-check partions with&nbsp;file.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> file p<span class="se">\*</span>.bin
+<span class="go">p0.bin: x86 boot sector; partition 1: ID=0x7, starthead 0,</span>
+<span class="go">startsector 31, 31558 sectors, extended partition table (last)11,</span>
+<span class="go">code offset 0x0</span>
+<span class="go">p1.bin: x86 boot sector; partition 1: ID=0x7, starthead 0,</span>
+<span class="go">startsector 31, 31558 sectors, extended partition table (last)11,</span>
+<span class="go">code offset 0x0</span>
+<span class="go">p2.bin: x86 boot sector, code offset 0x52, OEM-ID &quot;NTFS    &quot;,</span>
+<span class="go">sectors/cluster 8, reserved sectors 0, Media descriptor 0xf8,</span>
+<span class="go">heads 255, hidden sectors 31, dos &lt; 4.0 BootSector (0x0)</span>
+<span class="go">p3.bin: data</span>
+</pre></div>
+<p>Now take a quick look with strings at each partitions, if you are lucky
+you can see the key. Anyway go ahead with the full&nbsp;analysis.</p>
+<p>Now run foremost to carve files on all&nbsp;partitions.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> foremost -i p0.bin -o p0
+<span class="go">Processing: p0.bin</span>
+<span class="go">|*|</span>
+<span class="gp">$</span> foremost -i p1.bin -o p1
+<span class="go">Processing: p1.bin</span>
+<span class="go">|*|</span>
+<span class="gp">$</span> foremost -i p2.bin -o p2
+<span class="go">Processing: p2.bin</span>
+<span class="go">|*|</span>
+<span class="gp">$</span> foremost -i p3.bin -o p3
+<span class="go">Processing: p3.bin</span>
+<span class="go">|*|</span>
+</pre></div>
+<p>On p2.bin foremost recovers some file as we can see from&nbsp;audit.txt.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> cat p2/audit.txt
+<span class="go">Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick</span>
+<span class="go">Mikus</span>
+<span class="go">Audit File</span>
+
+<span class="go">Foremost started at Sun Jun 20 17:47:43 2010</span>
+<span class="go">Invocation: foremost -i p2.bin -o p2</span>
+<span class="go">Output directory: /home/jekil/Desktop/p2</span>
+<span class="go">Configuration file: /etc/foremost.conf</span>
+<span class="go">------------------------------------------------------------------</span>
+<span class="go">File: p2.bin</span>
+<span class="go">Start: Sun Jun 20 17:47:43 2010</span>
+<span class="go">Length: 15 MB (16171520 bytes)</span>
+
+<span class="go">Num     Name (bs=512)           Size     File Offset     Comment</span>
+
+<span class="go">0:    00000312.jpg           11 KB          159744</span>
+<span class="go">1:    00000336.jpg            4 KB          172032</span>
+<span class="go">2:    00000344.jpg            1 KB          176128</span>
+<span class="go">3:    00001032.jpg           13 KB          528384</span>
+<span class="go">4:    00001064.jpg           36 KB          544768</span>
+<span class="go">5:    00001144.jpg           32 KB          585728</span>
+<span class="go">6:    00001216.jpg            4 KB          622592</span>
+<span class="go">7:    00000288.png            9 KB          147456       (634 x 278)</span>
+<span class="go">Finish: Sun Jun 20 17:47:43 2010</span>
+
+<span class="go">8 FILES EXTRACTED</span>
+
+<span class="go">jpg:= 7</span>
+<span class="go">png:= 1</span>
+<span class="go">------------------------------------------------------------------</span>
+
+<span class="go">Foremost finished at Sun Jun 20 17:47:43 2010</span>
+</pre></div>
+<p>Get a look at these images with a viewer, one image seems to contains a
+kind of encoded (like base64) data but i haven&#8217;t found an use of that,
+another image contains some exif data, you can see that with exiftool or
+a viewer with metadata&nbsp;support.</p>
+<div class="highlight"><pre><span></span>File size : 4378 bytes
+File date : 2010:05:22 01:57:57
+Resolution : 116 x 102
+GPS Latitude : N 36d 8m 8.5s
+GPS Longitude: E 115d 9m 29s
+Comment : Who is the author?ASCII
+</pre></div>
+<p>Now it&#8217;s time to get a look at the file system. Add every partition to
+autopsy and search for interesting&nbsp;things.</p>
+<p>In partition two we found a suspect file in C:\key but it was&nbsp;deleted.</p>
+<p>Anyway it&#8217;s a <span class="caps">NTFS</span> partition so we can check $<span class="caps">MFT</span> for chunks of deleted
+files. Examining that and searching for the key file we see an
+interesting string encoded in Unicode (points are null&nbsp;byte)</p>
+<div class="highlight"><pre><span></span>n.o.t.d.e.l.e.t.e.d.,.n.e.v.e.r.existed
+</pre></div>
+<p>The key was&nbsp;&#8220;notdeleted,neverexisted&#8221;.</p>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jekil.sexy/tag/ctf.html">CTF</a>
+      <a href="https://jekil.sexy/tag/defcon.html">DEFCON</a>
+      <a href="https://jekil.sexy/tag/quals.html">quals</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jekilsexy';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

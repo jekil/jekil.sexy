@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="author" content="Alessandro Tanasi" />
+    <meta name="description" content="Alessandro Tanasi's Thoughts and Writings" />
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:description" content="Alessandro Tanasi's Thoughts and Writings"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash;     Category Tools
+</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article>
+  <header>
+    <h2><a href="https://jekil.sexy/blog/2020/udpot-updated-and-new-docker.html#udpot-updated-and-new-docker">UDPot updated and new&nbsp;docker</a></h2>
+    <p>
+          Posted on April 25, 2020 in <a href="https://jekil.sexy/category/tools.html">Tools</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://jekil.sexy/tag/honeypot.html">honeypot</a>,              <a href="https://jekil.sexy/tag/udpot.html">udpot</a>
+        &#8226; 1 min read
+    </p>
+  </header>
+  <div>
+      <p><a class="reference external" href="https://github.com/jekil/UDPot">UDPot</a> is a littel script to run
+an honeypot which acts as a real <span class="caps">DNS</span> server, sending out <span class="caps">DNS</span> replies
+for the first bunch of requests, and after it work as a&nbsp;sinkhole.</p>
+<p>In the last days I refreshed the code, updated the requirements and more
+spring&nbsp;cleaning.</p>
+<p>Now a docker image is available on <a class="reference external" href="https://hub.docker.com/r/jekil/udpot">DockerHub</a>,
+you can run it&nbsp;with:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> docker run --name udpot -p <span class="m">5053</span>:5053/udp -p <span class="m">5053</span>:5053/tcp -d jekil/udpot
+</pre></div>
+<p>It will run UDPot on port 5053 <span class="caps">UDP</span> and <span class="caps">TCP</span>, if you want to use it on another port you
+can bind it with …</p>
+      <br>
+      <a class="btn" href="https://jekil.sexy/blog/2020/udpot-updated-and-new-docker.html#udpot-updated-and-new-docker">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jekil.sexy/blog/2015/how-to-setup-an-image-forensic-lab-with-ghiro.html#how-to-setup-an-image-forensic-lab-with-ghiro">How to setup an Image Forensic lab with&nbsp;Ghiro</a></h2>
+    <p>
+          Posted on August 19, 2015 in <a href="https://jekil.sexy/category/tools.html">Tools</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://jekil.sexy/tag/appliance.html">appliance</a>,              <a href="https://jekil.sexy/tag/ghiro.html">ghiro</a>,              <a href="https://jekil.sexy/tag/image-forensics.html">image forensics</a>
+        &#8226; 3 min read
+    </p>
+  </header>
+  <div>
+      <p>This how to will guide you through the setup of an <strong>Image Forensics</strong>
+lab, using <a class="reference external" href="http://getghiro.org">Ghiro</a>, a free and open source image
+forensics&nbsp;tool.</p>
+<p>Ghiro comes also with a <strong>virtual appliance</strong> (it is a copy of Ubuntu
+Linux with all you need already installed, you can run on your host) to
+help people get a running Ghiro in few&nbsp;steps.</p>
+<div class="section" id="ready-for-virtualization">
+<h2>1. Ready for&nbsp;virtualization</h2>
+<p>You can run Ghiro Appliance in any host (Mac, Windows or Linux), &nbsp;only a
+virtualization software is requested.&nbsp;There are many out there, free and
+commercial, for example
+<a class="reference external" href="http://www.vmware.com/products/workstation">Vmware</a>&nbsp;or
+<a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a>.</p>
+<p><a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> is a free and …</p></div>
+      <br>
+      <a class="btn" href="https://jekil.sexy/blog/2015/how-to-setup-an-image-forensic-lab-with-ghiro.html#how-to-setup-an-image-forensic-lab-with-ghiro">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jekil.sexy/blog/2015/cuckoo-sandbox-summer-of-code-2015.html#cuckoo-sandbox-summer-of-code-2015">Cuckoo Sandbox Summer of Code&nbsp;2015</a></h2>
+    <p>
+          Posted on March 10, 2015 in <a href="https://jekil.sexy/category/tools.html">Tools</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://jekil.sexy/tag/cuckoo.html">cuckoo</a>,              <a href="https://jekil.sexy/tag/gsoc.html">GSOC</a>,              <a href="https://jekil.sexy/tag/gsoc2015.html">GSOC2015</a>
+        &#8226; 3 min read
+    </p>
+  </header>
+  <div>
+      <div class="line-block">
+<div class="line">This summer&nbsp;the <a class="reference external" href="http://cuckoosandbox.org/">Cuckoo Sandbox</a> project
+is participating the <a class="reference external" href="https://www.google-melange.com/gsoc/homepage/google/gsoc2015">Google Summer of Code
+2015,</a>
+thanks to a big effort of the <a class="reference external" href="http://www.honeynet.org/gsoc">Honeynet
+Project</a>.</div>
+<div class="line">This is a great opportunity for students who would like to work on
+Cuckoo and get paid for it! This is a great challenge and an huge
+opportunity to work on a real malware sandbox, write code and gain
+valuable experience, and help improving the open source security tools
+ecosystem.</div>
+<div class="line">Almost all college and graduate students are eligible, we are
+searching for problem solving people with strong development skills
+who would like to learn about malware and …</div></div>
+      <br>
+      <a class="btn" href="https://jekil.sexy/blog/2015/cuckoo-sandbox-summer-of-code-2015.html#cuckoo-sandbox-summer-of-code-2015">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jekil.sexy/blog/2015/cuckoo-sandbox-1-2-released.html#cuckoo-sandbox-1-2-released">Cuckoo Sandbox 1.2&nbsp;released</a></h2>
+    <p>
+          Posted on March 05, 2015 in <a href="https://jekil.sexy/category/tools.html">Tools</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://jekil.sexy/tag/cuckoo.html">cuckoo</a>
+        &#8226; 1 min read
+    </p>
+  </header>
+  <div>
+      <p>After a while we finally released <a class="reference external" href="http://cuckoosandbox.org/">Cuckoo
+Sandbox</a>&nbsp;1.2!</p>
+<p>It is one of the Cuckoo&#8217;s release with the most impressive amount of new
+features, just to mention a&nbsp;few:</p>
+<ul class="simple">
+<li>XenServer machinery&nbsp;support</li>
+<li>Physical machine support, to run analysis on bare&nbsp;metal</li>
+<li>Comparative reporting, you can compare analysis in a fancy&nbsp;way</li>
+<li>Improved visualization of network&nbsp;data</li>
+</ul>
+<p>A complete list of feature is available in the <a class="reference external" href="http://cuckoosandbox.org/2015-03-04-cuckoo-sandbox-12.html">announce
+post</a>, I
+kindly suggest to have a look over&nbsp;it.</p>
+
+      <br>
+      <a class="btn" href="https://jekil.sexy/blog/2015/cuckoo-sandbox-1-2-released.html#cuckoo-sandbox-1-2-released">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jekil.sexy/blog/2015/new-ghiro-website.html#new-ghiro-website">New Ghiro&nbsp;website</a></h2>
+    <p>
+          Posted on March 04, 2015 in <a href="https://jekil.sexy/category/tools.html">Tools</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://jekil.sexy/tag/ghiro.html">ghiro</a>
+        &#8226; 1 min read
+    </p>
+  </header>
+  <div>
+      <p>It seems that the old <a class="reference external" href="http://www.getghiro.org/">Ghiro website</a> was
+too hard for understand for people visiting&nbsp;it.</p>
+<p>All we know people stops on websites few seconds, so <strong>contents</strong> should
+be delivered in an efficient way, with a <strong>simple</strong>&nbsp;layout and &nbsp;short
+web&nbsp;page.</p>
+<p>After one year we read about people that barely were able to understand
+what Ghiro is, if it is an automated digital forensic tool or a brand
+new Photoshop clone. We read about people asking where they can download
+it, how much it costs a license and so&nbsp;on.</p>
+<p>So our <a class="reference external" href="https://twitter.com/burloneM">burlone</a>, Ghiro&#8217;s design
+engineer, put together …</p>
+      <br>
+      <a class="btn" href="https://jekil.sexy/blog/2015/new-ghiro-website.html#new-ghiro-website">    Continue reading
+</a>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="https://jekil.sexy/category/tools2.html">
+      <i class="fa fa-angle-left"></i>     Older Posts
+
+    </a>
+  </div>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

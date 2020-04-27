@@ -1,0 +1,1329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="jekil" />
+<meta name="description" content="Second forensic challange of the DEFCON 18 CTF qualifications: the suggestion was “find the key” and the related file is here. (Mirrors: #1) Trying to identify the file. $ file f200_02b7b50f575759cff7.tar.lzma f200_02b7b50f575759cff7.tar.lzma: data So we can try to trust the file extension. $ unlzma -d f200_02b7b50f575759cff7.tar.lzma $ tar xvf f200_02b7b50f575759cff7.tar IMG_0001.png IMG_0002.png IMG_0003.png IMG_0004.png IMG_0005.png IMG_0006.png IMG_0007.png IMG_0008.png IMG_0009.png IMG_0010.png IMG_0011.png IMG_0012.png IMG_0013.png IMG_0014.png IMG_0015.png IMG_0016.png IMG_0017.png IMG_0018.png IMG_0019.png IMG_0020.png IMG_0021.png IMG_0022.png IMG_0023.png …" />
+<meta name="keywords" content="CTF, DEFCON, quals">
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:title" content="DEFCON 18 CTF quals - Forensic 200 writeup"/>
+<meta property="og:description" content="Second forensic challange of the DEFCON 18 CTF qualifications: the suggestion was “find the key” and the related file is here. (Mirrors: #1) Trying to identify the file. $ file f200_02b7b50f575759cff7.tar.lzma f200_02b7b50f575759cff7.tar.lzma: data So we can try to trust the file extension. $ unlzma -d f200_02b7b50f575759cff7.tar.lzma $ tar xvf f200_02b7b50f575759cff7.tar IMG_0001.png IMG_0002.png IMG_0003.png IMG_0004.png IMG_0005.png IMG_0006.png IMG_0007.png IMG_0008.png IMG_0009.png IMG_0010.png IMG_0011.png IMG_0012.png IMG_0013.png IMG_0014.png IMG_0015.png IMG_0016.png IMG_0017.png IMG_0018.png IMG_0019.png IMG_0020.png IMG_0021.png IMG_0022.png IMG_0023.png …"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy/blog/2010/defcon-18-ctf-quals-forensic-200-writeup.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2010-07-01 15:20:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jekil.sexy/author/jekil.html">
+<meta property="article:section" content="Blog"/>
+<meta property="article:tag" content="CTF"/>
+<meta property="article:tag" content="DEFCON"/>
+<meta property="article:tag" content="quals"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash; DEFCON 18 CTF quals - Forensic 200 writeup</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="defcon-18-ctf-quals-forensic-200-writeup"><span class="caps">DEFCON</span> 18 <span class="caps">CTF</span> quals - Forensic 200&nbsp;writeup</h1>
+    <p>
+          Posted on July 01, 2010 in <a href="https://jekil.sexy/category/blog.html">Blog</a>
+
+
+        &#8226; 6 min read
+    </p>
+  </header>
+  <div>
+    <p>Second forensic challange of the <span class="caps">DEFCON</span> 18 <span class="caps">CTF</span> qualifications: the
+suggestion was “<em>find the key</em>” and the related file is
+<a class="reference external" href="http://squidzrus.schleppingsquid.net/DC18-Qual-Walks/f200_02b7b50f575759cff7.tar.lzma">here</a>.
+(Mirrors:
+<a class="reference external" href="http://cs.ucsb.edu/~bboe/public/bin/f200_02b7b50f575759cff7.tar">#1</a>)</p>
+<p>Trying to identify the&nbsp;file.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> file f200_02b7b50f575759cff7.tar.lzma
+<span class="go">f200_02b7b50f575759cff7.tar.lzma: data</span>
+</pre></div>
+<p>So we can try to trust the file&nbsp;extension.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> unlzma -d f200_02b7b50f575759cff7.tar.lzma
+
+<span class="gp">$</span> tar xvf f200_02b7b50f575759cff7.tar
+<span class="go">IMG_0001.png</span>
+<span class="go">IMG_0002.png</span>
+<span class="go">IMG_0003.png</span>
+<span class="go">IMG_0004.png</span>
+<span class="go">IMG_0005.png</span>
+<span class="go">IMG_0006.png</span>
+<span class="go">IMG_0007.png</span>
+<span class="go">IMG_0008.png</span>
+<span class="go">IMG_0009.png</span>
+<span class="go">IMG_0010.png</span>
+<span class="go">IMG_0011.png</span>
+<span class="go">IMG_0012.png</span>
+<span class="go">IMG_0013.png</span>
+<span class="go">IMG_0014.png</span>
+<span class="go">IMG_0015.png</span>
+<span class="go">IMG_0016.png</span>
+<span class="go">IMG_0017.png</span>
+<span class="go">IMG_0018.png</span>
+<span class="go">IMG_0019.png</span>
+<span class="go">IMG_0020.png</span>
+<span class="go">IMG_0021.png</span>
+<span class="go">IMG_0022.png</span>
+<span class="go">IMG_0023.png</span>
+<span class="go">IMG_0024.png</span>
+<span class="go">IMG_0025.png</span>
+<span class="go">IMG_0026.png</span>
+<span class="go">IMG_0027.png</span>
+<span class="go">IMG_0028.png</span>
+<span class="go">IMG_0029.png</span>
+<span class="go">IMG_0030.png</span>
+<span class="go">IMG_0031.png</span>
+<span class="go">IMG_0032.png</span>
+<span class="go">IMG_0033.png</span>
+<span class="go">IMG_0034.png</span>
+<span class="go">IMG_0035.png</span>
+<span class="go">IMG_0036.png</span>
+<span class="go">IMG_0037.png</span>
+<span class="go">IMG_0038.png</span>
+<span class="go">IMG_0039.png</span>
+<span class="go">IMG_0040.png</span>
+<span class="go">IMG_0041.png</span>
+<span class="go">IMG_0042.png</span>
+<span class="go">IMG_0043.png</span>
+<span class="go">IMG_0044.png</span>
+<span class="go">IMG_0045.png</span>
+<span class="go">IMG_0046.png</span>
+<span class="go">IMG_0047.png</span>
+<span class="go">IMG_0048.png</span>
+<span class="go">IMG_0049.png</span>
+<span class="go">IMG_0050.png</span>
+<span class="go">IMG_0051.png</span>
+<span class="go">IMG_0052.png</span>
+<span class="go">IMG_0053.png</span>
+<span class="go">IMG_0054.png</span>
+<span class="go">IMG_0055.png</span>
+<span class="go">IMG_0056.png</span>
+<span class="go">IMG_0057.png</span>
+<span class="go">IMG_0058.png</span>
+<span class="go">IMG_0059.png</span>
+<span class="go">IMG_0060.png</span>
+<span class="go">IMG_0061.png</span>
+<span class="go">IMG_0062.png</span>
+<span class="go">IMG_0063.png</span>
+<span class="go">IMG_0064.png</span>
+<span class="go">IMG_0065.png</span>
+<span class="go">IMG_0066.png</span>
+<span class="go">IMG_0067.png</span>
+<span class="go">IMG_0068.png</span>
+<span class="go">IMG_0069.png</span>
+<span class="go">IMG_0070.png</span>
+<span class="go">IMG_0071.png</span>
+<span class="go">IMG_0072.png</span>
+<span class="go">IMG_0073.png</span>
+<span class="go">IMG_0074.png</span>
+<span class="go">IMG_0075.png</span>
+<span class="go">IMG_0076.png</span>
+<span class="go">IMG_0077.png</span>
+<span class="go">IMG_0078.png</span>
+<span class="go">IMG_0079.png</span>
+<span class="go">IMG_0080.png</span>
+<span class="go">IMG_0081.png</span>
+<span class="go">IMG_0082.png</span>
+<span class="go">IMG_0083.png</span>
+<span class="go">IMG_0084.png</span>
+<span class="go">IMG_0085.png</span>
+<span class="go">IMG_0086.png</span>
+<span class="go">IMG_0087.png</span>
+<span class="go">IMG_0088.png</span>
+<span class="go">IMG_0089.png</span>
+<span class="go">IMG_0090.png</span>
+<span class="go">IMG_0091.png</span>
+<span class="go">IMG_0092.png</span>
+<span class="go">IMG_0093.png</span>
+<span class="go">IMG_0094.png</span>
+<span class="go">IMG_0095.png</span>
+<span class="go">IMG_0096.png</span>
+<span class="go">IMG_0097.png</span>
+<span class="go">IMG_0098.png</span>
+<span class="go">IMG_0099.png</span>
+<span class="go">IMG_0100.png</span>
+<span class="go">IMG_0101.png</span>
+<span class="go">IMG_0102.png</span>
+<span class="go">IMG_0103.png</span>
+<span class="go">IMG_0104.png</span>
+<span class="go">IMG_0105.png</span>
+<span class="go">IMG_0106.png</span>
+<span class="go">IMG_0107.png</span>
+<span class="go">IMG_0108.png</span>
+<span class="go">IMG_0109.png</span>
+<span class="go">IMG_0110.png</span>
+<span class="go">IMG_0111.png</span>
+<span class="go">IMG_0112.png</span>
+<span class="go">IMG_0113.png</span>
+<span class="go">IMG_0114.png</span>
+<span class="go">IMG_0115.png</span>
+<span class="go">IMG_0116.png</span>
+<span class="go">IMG_0117.png</span>
+<span class="go">IMG_0118.png</span>
+<span class="go">IMG_0119.png</span>
+<span class="go">IMG_0120.png</span>
+<span class="go">IMG_0121.png</span>
+<span class="go">IMG_0122.png</span>
+<span class="go">IMG_0123.png</span>
+<span class="go">IMG_0124.png</span>
+<span class="go">IMG_0125.png</span>
+<span class="go">IMG_0126.png</span>
+<span class="go">IMG_0127.png</span>
+<span class="go">IMG_0128.png</span>
+<span class="go">IMG_0129.png</span>
+<span class="go">IMG_0130.png</span>
+<span class="go">IMG_0131.png</span>
+<span class="go">IMG_0132.png</span>
+<span class="go">IMG_0133.png</span>
+<span class="go">IMG_0134.png</span>
+<span class="go">IMG_0135.png</span>
+<span class="go">IMG_0136.png</span>
+<span class="go">IMG_0137.png</span>
+<span class="go">IMG_0138.png</span>
+<span class="go">IMG_0139.png</span>
+<span class="go">IMG_0140.png</span>
+<span class="go">IMG_0141.png</span>
+<span class="go">IMG_0142.png</span>
+<span class="go">IMG_0143.png</span>
+<span class="go">IMG_0144.png</span>
+<span class="go">IMG_0145.png</span>
+<span class="go">IMG_0146.png</span>
+<span class="go">IMG_0147.png</span>
+<span class="go">IMG_0148.png</span>
+<span class="go">IMG_0149.png</span>
+<span class="go">IMG_0150.png</span>
+<span class="go">IMG_0151.png</span>
+<span class="go">IMG_0152.png</span>
+<span class="go">IMG_0153.png</span>
+<span class="go">IMG_0154.png</span>
+<span class="go">IMG_0155.png</span>
+<span class="go">IMG_0156.png</span>
+<span class="go">IMG_0157.png</span>
+<span class="go">IMG_0158.png</span>
+<span class="go">IMG_0159.png</span>
+<span class="go">IMG_0160.png</span>
+<span class="go">IMG_0161.png</span>
+<span class="go">IMG_0162.png</span>
+<span class="go">IMG_0163.png</span>
+<span class="go">IMG_0164.png</span>
+<span class="go">IMG_0165.png</span>
+<span class="go">IMG_0166.png</span>
+<span class="go">IMG_0167.png</span>
+<span class="go">IMG_0168.png</span>
+<span class="go">IMG_0169.png</span>
+<span class="go">IMG_0170.png</span>
+<span class="go">IMG_0171.png</span>
+<span class="go">IMG_0172.png</span>
+<span class="go">IMG_0173.png</span>
+<span class="go">IMG_0174.png</span>
+<span class="go">IMG_0175.png</span>
+<span class="go">IMG_0176.png</span>
+<span class="go">IMG_0177.png</span>
+<span class="go">IMG_0178.png</span>
+<span class="go">IMG_0179.png</span>
+<span class="go">IMG_0180.png</span>
+<span class="go">IMG_0181.png</span>
+<span class="go">IMG_0182.png</span>
+<span class="go">IMG_0183.png</span>
+<span class="go">IMG_0184.png</span>
+<span class="go">IMG_0185.png</span>
+<span class="go">IMG_0186.png</span>
+<span class="go">IMG_0187.png</span>
+<span class="go">IMG_0188.png</span>
+<span class="go">IMG_0189.png</span>
+<span class="go">IMG_0190.png</span>
+<span class="go">IMG_0191.png</span>
+<span class="go">IMG_0192.png</span>
+<span class="go">IMG_0193.png</span>
+<span class="go">IMG_0194.png</span>
+<span class="go">IMG_0195.png</span>
+<span class="go">IMG_0196.png</span>
+<span class="go">IMG_0197.png</span>
+<span class="go">IMG_0198.png</span>
+<span class="go">IMG_0199.png</span>
+<span class="go">IMG_0200.png</span>
+<span class="go">IMG_0201.png</span>
+<span class="go">IMG_0202.png</span>
+<span class="go">IMG_0203.png</span>
+<span class="go">IMG_0204.png</span>
+<span class="go">IMG_0205.png</span>
+<span class="go">IMG_0206.png</span>
+<span class="go">IMG_0207.png</span>
+<span class="go">IMG_0208.png</span>
+<span class="go">IMG_0209.png</span>
+<span class="go">IMG_0210.png</span>
+<span class="go">IMG_0211.png</span>
+<span class="go">IMG_0212.png</span>
+<span class="go">IMG_0213.png</span>
+<span class="go">IMG_0214.png</span>
+<span class="go">IMG_0215.png</span>
+<span class="go">IMG_0216.png</span>
+<span class="go">IMG_0217.png</span>
+<span class="go">IMG_0218.png</span>
+<span class="go">IMG_0219.png</span>
+<span class="go">IMG_0220.png</span>
+<span class="go">IMG_0221.png</span>
+<span class="go">IMG_0222.png</span>
+<span class="go">IMG_0223.png</span>
+<span class="go">IMG_0224.png</span>
+<span class="go">IMG_0225.png</span>
+<span class="go">IMG_0226.png</span>
+<span class="go">IMG_0227.png</span>
+<span class="go">IMG_0228.png</span>
+<span class="go">IMG_0229.png</span>
+<span class="go">IMG_0230.png</span>
+<span class="go">IMG_0231.png</span>
+<span class="go">IMG_0232.png</span>
+<span class="go">IMG_0233.png</span>
+<span class="go">IMG_0234.png</span>
+<span class="go">IMG_0235.png</span>
+<span class="go">IMG_0236.png</span>
+<span class="go">IMG_0237.png</span>
+<span class="go">IMG_0238.png</span>
+<span class="go">IMG_0239.png</span>
+<span class="go">IMG_0240.png</span>
+<span class="go">IMG_0241.png</span>
+<span class="go">IMG_0242.png</span>
+<span class="go">IMG_0243.png</span>
+<span class="go">IMG_0244.png</span>
+<span class="go">IMG_0245.png</span>
+<span class="go">IMG_0246.png</span>
+<span class="go">IMG_0247.png</span>
+<span class="go">IMG_0248.png</span>
+<span class="go">IMG_0249.png</span>
+<span class="go">IMG_0250.png</span>
+<span class="go">IMG_0251.png</span>
+<span class="go">IMG_0252.png</span>
+<span class="go">IMG_0253.png</span>
+<span class="go">IMG_0254.png</span>
+<span class="go">IMG_0255.png</span>
+<span class="go">IMG_0256.png</span>
+<span class="go">IMG_0257.png</span>
+<span class="go">IMG_0258.png</span>
+<span class="go">IMG_0259.png</span>
+<span class="go">IMG_0260.png</span>
+<span class="go">IMG_0261.png</span>
+<span class="go">IMG_0262.png</span>
+<span class="go">IMG_0263.png</span>
+<span class="go">IMG_0264.png</span>
+<span class="go">IMG_0265.png</span>
+<span class="go">IMG_0266.png</span>
+<span class="go">IMG_0267.png</span>
+<span class="go">IMG_0268.png</span>
+<span class="go">IMG_0269.png</span>
+<span class="go">IMG_0270.png</span>
+<span class="go">IMG_0271.png</span>
+<span class="go">IMG_0272.png</span>
+<span class="go">IMG_0273.png</span>
+<span class="go">IMG_0274.png</span>
+<span class="go">IMG_0275.png</span>
+<span class="go">IMG_0276.png</span>
+<span class="go">IMG_0277.png</span>
+<span class="go">IMG_0278.png</span>
+<span class="go">IMG_0279.png</span>
+<span class="go">IMG_0280.png</span>
+<span class="go">IMG_0281.png</span>
+<span class="go">IMG_0282.png</span>
+<span class="go">IMG_0283.png</span>
+<span class="go">IMG_0284.png</span>
+<span class="go">IMG_0285.png</span>
+<span class="go">IMG_0286.png</span>
+<span class="go">IMG_0287.png</span>
+<span class="go">IMG_0288.png</span>
+<span class="go">IMG_0289.png</span>
+<span class="go">IMG_0290.png</span>
+<span class="go">IMG_0291.png</span>
+<span class="go">IMG_0292.png</span>
+<span class="go">IMG_0293.png</span>
+<span class="go">IMG_0294.png</span>
+<span class="go">IMG_0295.png</span>
+<span class="go">IMG_0296.png</span>
+<span class="go">IMG_0297.png</span>
+<span class="go">IMG_0298.png</span>
+<span class="go">IMG_0299.png</span>
+<span class="go">IMG_0300.png</span>
+<span class="go">IMG_0301.png</span>
+<span class="go">IMG_0302.png</span>
+<span class="go">IMG_0303.png</span>
+<span class="go">IMG_0304.png</span>
+<span class="go">IMG_0305.png</span>
+<span class="go">IMG_0306.png</span>
+<span class="go">IMG_0307.png</span>
+<span class="go">IMG_0308.png</span>
+<span class="go">IMG_0309.png</span>
+<span class="go">IMG_0310.png</span>
+<span class="go">IMG_0311.png</span>
+<span class="go">IMG_0312.png</span>
+<span class="go">IMG_0313.png</span>
+<span class="go">IMG_0314.png</span>
+<span class="go">IMG_0315.png</span>
+<span class="go">IMG_0316.png</span>
+<span class="go">IMG_0317.png</span>
+<span class="go">IMG_0318.png</span>
+<span class="go">IMG_0319.png</span>
+<span class="go">IMG_0320.png</span>
+<span class="go">IMG_0321.png</span>
+<span class="go">IMG_0322.png</span>
+<span class="go">IMG_0323.png</span>
+<span class="go">IMG_0324.png</span>
+<span class="go">IMG_0325.png</span>
+<span class="go">IMG_0326.png</span>
+<span class="go">IMG_0327.png</span>
+<span class="go">IMG_0328.png</span>
+<span class="go">IMG_0329.png</span>
+<span class="go">IMG_0330.png</span>
+<span class="go">IMG_0331.png</span>
+<span class="go">IMG_0332.png</span>
+<span class="go">IMG_0333.png</span>
+<span class="go">IMG_0334.png</span>
+<span class="go">IMG_0335.png</span>
+<span class="go">IMG_0336.png</span>
+<span class="go">IMG_0337.png</span>
+<span class="go">IMG_0338.png</span>
+<span class="go">IMG_0339.png</span>
+<span class="go">IMG_0340.png</span>
+<span class="go">IMG_0341.png</span>
+<span class="go">IMG_0342.png</span>
+<span class="go">IMG_0343.png</span>
+<span class="go">IMG_0344.png</span>
+<span class="go">IMG_0345.png</span>
+<span class="go">IMG_0346.png</span>
+<span class="go">IMG_0347.png</span>
+<span class="go">IMG_0348.png</span>
+<span class="go">IMG_0349.png</span>
+<span class="go">IMG_0350.png</span>
+<span class="go">IMG_0351.png</span>
+<span class="go">IMG_0352.png</span>
+<span class="go">IMG_0353.png</span>
+<span class="go">IMG_0354.png</span>
+<span class="go">IMG_0355.png</span>
+<span class="go">IMG_0356.png</span>
+<span class="go">IMG_0357.png</span>
+<span class="go">IMG_0358.png</span>
+<span class="go">IMG_0359.png</span>
+<span class="go">IMG_0360.png</span>
+<span class="go">IMG_0361.png</span>
+<span class="go">IMG_0362.png</span>
+<span class="go">IMG_0363.png</span>
+<span class="go">IMG_0364.png</span>
+<span class="go">IMG_0365.png</span>
+<span class="go">IMG_0366.png</span>
+<span class="go">IMG_0367.png</span>
+<span class="go">IMG_0368.png</span>
+<span class="go">IMG_0369.png</span>
+<span class="go">IMG_0370.png</span>
+<span class="go">IMG_0371.png</span>
+<span class="go">IMG_0372.png</span>
+<span class="go">IMG_0373.png</span>
+<span class="go">IMG_0374.png</span>
+<span class="go">IMG_0375.png</span>
+<span class="go">IMG_0376.png</span>
+<span class="go">IMG_0377.png</span>
+<span class="go">IMG_0378.png</span>
+<span class="go">IMG_0379.png</span>
+<span class="go">IMG_0380.png</span>
+<span class="go">IMG_0381.png</span>
+<span class="go">IMG_0382.png</span>
+<span class="go">IMG_0383.png</span>
+<span class="go">IMG_0384.png</span>
+<span class="go">IMG_0385.png</span>
+<span class="go">IMG_0386.png</span>
+<span class="go">IMG_0387.png</span>
+<span class="go">IMG_0388.png</span>
+<span class="go">IMG_0389.png</span>
+<span class="go">IMG_0390.png</span>
+<span class="go">IMG_0391.png</span>
+<span class="go">IMG_0392.png</span>
+<span class="go">IMG_0393.png</span>
+<span class="go">IMG_0394.png</span>
+<span class="go">IMG_0395.png</span>
+<span class="go">IMG_0396.png</span>
+<span class="go">IMG_0397.png</span>
+<span class="go">IMG_0398.png</span>
+<span class="go">IMG_0399.png</span>
+<span class="go">IMG_0400.png</span>
+<span class="go">IMG_0401.png</span>
+<span class="go">IMG_0402.png</span>
+<span class="go">IMG_0403.png</span>
+<span class="go">IMG_0404.png</span>
+<span class="go">IMG_0405.png</span>
+<span class="go">IMG_0406.png</span>
+<span class="go">IMG_0407.png</span>
+<span class="go">IMG_0408.png</span>
+<span class="go">IMG_0409.png</span>
+<span class="go">IMG_0410.png</span>
+<span class="go">IMG_0411.png</span>
+<span class="go">IMG_0412.png</span>
+<span class="go">IMG_0413.png</span>
+<span class="go">IMG_0414.png</span>
+<span class="go">IMG_0415.png</span>
+<span class="go">IMG_0416.png</span>
+<span class="go">IMG_0417.png</span>
+<span class="go">IMG_0418.png</span>
+<span class="go">IMG_0419.png</span>
+<span class="go">IMG_0420.png</span>
+<span class="go">IMG_0421.png</span>
+<span class="go">IMG_0422.png</span>
+<span class="go">IMG_0423.png</span>
+<span class="go">IMG_0424.png</span>
+<span class="go">IMG_0425.png</span>
+<span class="go">IMG_0426.png</span>
+<span class="go">IMG_0427.png</span>
+<span class="go">IMG_0428.png</span>
+<span class="go">IMG_0429.png</span>
+<span class="go">IMG_0430.png</span>
+<span class="go">IMG_0431.png</span>
+<span class="go">IMG_0432.png</span>
+<span class="go">IMG_0433.png</span>
+<span class="go">IMG_0434.png</span>
+<span class="go">IMG_0435.png</span>
+<span class="go">IMG_0436.png</span>
+<span class="go">IMG_0437.png</span>
+<span class="go">IMG_0438.png</span>
+<span class="go">IMG_0439.png</span>
+<span class="go">IMG_0440.png</span>
+<span class="go">IMG_0441.png</span>
+<span class="go">IMG_0442.png</span>
+<span class="go">IMG_0443.png</span>
+<span class="go">IMG_0444.png</span>
+<span class="go">IMG_0445.png</span>
+<span class="go">IMG_0446.png</span>
+<span class="go">IMG_0447.png</span>
+<span class="go">IMG_0448.png</span>
+<span class="go">IMG_0449.png</span>
+<span class="go">IMG_0450.png</span>
+<span class="go">IMG_0451.png</span>
+<span class="go">IMG_0452.png</span>
+<span class="go">IMG_0453.png</span>
+<span class="go">IMG_0454.png</span>
+<span class="go">IMG_0455.png</span>
+<span class="go">IMG_0456.png</span>
+<span class="go">IMG_0457.png</span>
+<span class="go">IMG_0458.png</span>
+<span class="go">IMG_0459.png</span>
+<span class="go">IMG_0460.png</span>
+<span class="go">IMG_0461.png</span>
+<span class="go">IMG_0462.png</span>
+<span class="go">IMG_0463.png</span>
+<span class="go">IMG_0464.png</span>
+<span class="go">IMG_0465.png</span>
+<span class="go">IMG_0466.png</span>
+<span class="go">IMG_0467.png</span>
+<span class="go">IMG_0468.png</span>
+<span class="go">IMG_0469.png</span>
+<span class="go">IMG_0470.png</span>
+<span class="go">IMG_0471.png</span>
+<span class="go">IMG_0472.png</span>
+<span class="go">IMG_0473.png</span>
+<span class="go">IMG_0474.png</span>
+<span class="go">IMG_0475.png</span>
+<span class="go">IMG_0476.png</span>
+<span class="go">IMG_0477.png</span>
+<span class="go">IMG_0478.png</span>
+<span class="go">IMG_0479.png</span>
+<span class="go">IMG_0480.png</span>
+<span class="go">IMG_0481.png</span>
+<span class="go">IMG_0482.png</span>
+<span class="go">IMG_0483.png</span>
+<span class="go">IMG_0484.png</span>
+<span class="go">IMG_0485.png</span>
+<span class="go">IMG_0486.png</span>
+<span class="go">IMG_0487.png</span>
+<span class="go">IMG_0488.png</span>
+<span class="go">IMG_0489.png</span>
+<span class="go">IMG_0490.png</span>
+<span class="go">IMG_0491.png</span>
+<span class="go">IMG_0492.png</span>
+<span class="go">IMG_0493.png</span>
+<span class="go">IMG_0494.png</span>
+<span class="go">IMG_0495.png</span>
+<span class="go">IMG_0496.png</span>
+<span class="go">IMG_0497.png</span>
+<span class="go">IMG_0498.png</span>
+<span class="go">IMG_0499.png</span>
+<span class="go">IMG_0500.png</span>
+<span class="go">IMG_0501.png</span>
+<span class="go">IMG_0502.png</span>
+<span class="go">IMG_0503.png</span>
+<span class="go">IMG_0504.png</span>
+<span class="go">IMG_0505.png</span>
+<span class="go">IMG_0506.png</span>
+<span class="go">IMG_0507.png</span>
+<span class="go">IMG_0508.png</span>
+<span class="go">IMG_0509.png</span>
+<span class="go">IMG_0510.png</span>
+<span class="go">IMG_0511.png</span>
+<span class="go">IMG_0512.png</span>
+<span class="go">IMG_0513.png</span>
+<span class="go">IMG_0514.png</span>
+<span class="go">IMG_0515.png</span>
+<span class="go">IMG_0516.png</span>
+<span class="go">IMG_0517.png</span>
+<span class="go">IMG_0518.png</span>
+<span class="go">IMG_0519.png</span>
+<span class="go">IMG_0520.png</span>
+<span class="go">IMG_0521.png</span>
+<span class="go">IMG_0522.png</span>
+<span class="go">IMG_0523.png</span>
+<span class="go">IMG_0524.png</span>
+<span class="go">IMG_0525.png</span>
+<span class="go">IMG_0526.png</span>
+<span class="go">IMG_0527.png</span>
+<span class="go">IMG_0528.png</span>
+<span class="go">IMG_0529.png</span>
+<span class="go">IMG_0530.png</span>
+<span class="go">IMG_0531.png</span>
+<span class="go">IMG_0532.png</span>
+<span class="go">IMG_0533.png</span>
+<span class="go">IMG_0534.png</span>
+<span class="go">IMG_0535.png</span>
+<span class="go">IMG_0536.png</span>
+<span class="go">IMG_0537.png</span>
+<span class="go">IMG_0538.png</span>
+<span class="go">IMG_0539.png</span>
+<span class="go">IMG_0540.png</span>
+<span class="go">IMG_0541.png</span>
+<span class="go">IMG_0542.png</span>
+<span class="go">IMG_0543.png</span>
+<span class="go">IMG_0544.png</span>
+<span class="go">IMG_0545.png</span>
+<span class="go">IMG_0546.png</span>
+<span class="go">IMG_0547.png</span>
+<span class="go">IMG_0548.png</span>
+<span class="go">IMG_0549.png</span>
+<span class="go">IMG_0550.png</span>
+<span class="go">IMG_0551.png</span>
+<span class="go">IMG_0552.png</span>
+<span class="go">IMG_0553.png</span>
+<span class="go">IMG_0554.png</span>
+<span class="go">IMG_0555.png</span>
+<span class="go">IMG_0556.png</span>
+<span class="go">IMG_0557.png</span>
+<span class="go">IMG_0558.png</span>
+<span class="go">IMG_0559.png</span>
+<span class="go">IMG_0560.png</span>
+<span class="go">IMG_0561.png</span>
+<span class="go">IMG_0562.png</span>
+<span class="go">IMG_0563.png</span>
+<span class="go">IMG_0564.png</span>
+<span class="go">IMG_0565.png</span>
+<span class="go">IMG_0566.png</span>
+<span class="go">IMG_0567.png</span>
+<span class="go">IMG_0568.png</span>
+<span class="go">IMG_0569.png</span>
+<span class="go">IMG_0570.png</span>
+<span class="go">IMG_0571.png</span>
+<span class="go">IMG_0572.png</span>
+<span class="go">IMG_0573.png</span>
+<span class="go">IMG_0574.png</span>
+<span class="go">IMG_0575.png</span>
+<span class="go">IMG_0576.png</span>
+<span class="go">IMG_0577.png</span>
+<span class="go">IMG_0578.png</span>
+<span class="go">IMG_0579.png</span>
+<span class="go">IMG_0580.png</span>
+<span class="go">IMG_0581.png</span>
+<span class="go">IMG_0582.png</span>
+<span class="go">IMG_0583.png</span>
+<span class="go">IMG_0584.png</span>
+<span class="go">IMG_0585.png</span>
+<span class="go">IMG_0586.png</span>
+<span class="go">IMG_0587.png</span>
+<span class="go">IMG_0588.png</span>
+<span class="go">IMG_0589.png</span>
+<span class="go">IMG_0590.png</span>
+<span class="go">IMG_0591.png</span>
+<span class="go">IMG_0592.png</span>
+<span class="go">IMG_0593.png</span>
+<span class="go">IMG_0594.png</span>
+<span class="go">IMG_0595.png</span>
+<span class="go">IMG_0596.png</span>
+<span class="go">IMG_0597.png</span>
+<span class="go">IMG_0598.png</span>
+<span class="go">IMG_0599.png</span>
+<span class="go">IMG_0600.png</span>
+<span class="go">IMG_0601.png</span>
+<span class="go">IMG_0602.png</span>
+<span class="go">IMG_0603.png</span>
+<span class="go">IMG_0604.png</span>
+<span class="go">IMG_0605.png</span>
+<span class="go">IMG_0606.png</span>
+<span class="go">IMG_0607.png</span>
+<span class="go">IMG_0608.png</span>
+<span class="go">IMG_0609.png</span>
+<span class="go">IMG_0610.png</span>
+<span class="go">IMG_0611.png</span>
+<span class="go">IMG_0612.png</span>
+<span class="go">IMG_0613.png</span>
+<span class="go">IMG_0614.png</span>
+<span class="go">IMG_0615.png</span>
+<span class="go">IMG_0616.png</span>
+<span class="go">IMG_0617.png</span>
+<span class="go">IMG_0618.png</span>
+<span class="go">IMG_0619.png</span>
+<span class="go">IMG_0620.png</span>
+<span class="go">IMG_0621.png</span>
+<span class="go">IMG_0622.png</span>
+<span class="go">IMG_0623.png</span>
+<span class="go">IMG_0624.png</span>
+<span class="go">IMG_0625.png</span>
+<span class="go">IMG_0626.png</span>
+<span class="go">IMG_0627.png</span>
+<span class="go">IMG_0628.png</span>
+<span class="go">IMG_0629.png</span>
+<span class="go">IMG_0630.png</span>
+<span class="go">IMG_0631.png</span>
+<span class="go">IMG_0632.png</span>
+<span class="go">IMG_0633.png</span>
+<span class="go">IMG_0634.png</span>
+<span class="go">IMG_0635.png</span>
+<span class="go">IMG_0636.png</span>
+<span class="go">IMG_0637.png</span>
+<span class="go">IMG_0638.png</span>
+<span class="go">IMG_0639.png</span>
+<span class="go">IMG_0640.png</span>
+<span class="go">IMG_0641.png</span>
+<span class="go">IMG_0642.png</span>
+<span class="go">IMG_0643.png</span>
+<span class="go">IMG_0644.png</span>
+<span class="go">IMG_0645.png</span>
+<span class="go">IMG_0646.png</span>
+<span class="go">IMG_0647.png</span>
+<span class="go">IMG_0648.png</span>
+<span class="go">IMG_0649.png</span>
+<span class="go">IMG_0650.png</span>
+<span class="go">IMG_0651.png</span>
+<span class="go">IMG_0652.png</span>
+<span class="go">IMG_0653.png</span>
+<span class="go">IMG_0654.png</span>
+<span class="go">IMG_0655.png</span>
+<span class="go">IMG_0656.png</span>
+<span class="go">IMG_0657.png</span>
+<span class="go">IMG_0658.png</span>
+<span class="go">IMG_0659.png</span>
+<span class="go">IMG_0660.png</span>
+<span class="go">IMG_0661.png</span>
+<span class="go">IMG_0662.png</span>
+<span class="go">IMG_0663.png</span>
+<span class="go">IMG_0664.png</span>
+<span class="go">IMG_0665.png</span>
+<span class="go">IMG_0666.png</span>
+<span class="go">IMG_0667.png</span>
+<span class="go">IMG_0668.png</span>
+<span class="go">IMG_0669.png</span>
+<span class="go">IMG_0670.png</span>
+<span class="go">IMG_0671.png</span>
+<span class="go">IMG_0672.png</span>
+<span class="go">IMG_0673.png</span>
+<span class="go">IMG_0674.png</span>
+<span class="go">IMG_0675.png</span>
+<span class="go">IMG_0676.png</span>
+<span class="go">IMG_0677.png</span>
+<span class="go">IMG_0678.png</span>
+<span class="go">IMG_0679.png</span>
+<span class="go">IMG_0680.png</span>
+<span class="go">IMG_0681.png</span>
+<span class="go">IMG_0682.png</span>
+<span class="go">IMG_0683.png</span>
+<span class="go">IMG_0684.png</span>
+<span class="go">IMG_0685.png</span>
+<span class="go">IMG_0686.png</span>
+<span class="go">IMG_0687.png</span>
+<span class="go">IMG_0688.png</span>
+<span class="go">IMG_0689.png</span>
+<span class="go">IMG_0690.png</span>
+<span class="go">IMG_0691.png</span>
+<span class="go">IMG_0692.png</span>
+<span class="go">IMG_0693.png</span>
+<span class="go">IMG_0694.png</span>
+<span class="go">IMG_0695.png</span>
+<span class="go">IMG_0696.png</span>
+<span class="go">IMG_0697.png</span>
+<span class="go">IMG_0698.png</span>
+<span class="go">IMG_0699.png</span>
+<span class="go">IMG_0700.png</span>
+<span class="go">IMG_0701.png</span>
+<span class="go">IMG_0702.png</span>
+<span class="go">IMG_0703.png</span>
+<span class="go">IMG_0704.png</span>
+<span class="go">IMG_0705.png</span>
+<span class="go">IMG_0706.png</span>
+<span class="go">IMG_0707.png</span>
+<span class="go">IMG_0708.png</span>
+<span class="go">IMG_0709.png</span>
+<span class="go">IMG_0710.png</span>
+<span class="go">IMG_0711.png</span>
+<span class="go">IMG_0712.png</span>
+<span class="go">IMG_0713.png</span>
+<span class="go">IMG_0714.png</span>
+<span class="go">IMG_0715.png</span>
+<span class="go">IMG_0716.png</span>
+<span class="go">IMG_0717.png</span>
+<span class="go">IMG_0718.png</span>
+<span class="go">IMG_0719.png</span>
+<span class="go">IMG_0720.png</span>
+<span class="go">IMG_0721.png</span>
+<span class="go">IMG_0722.png</span>
+<span class="go">IMG_0723.png</span>
+<span class="go">IMG_0724.png</span>
+<span class="go">IMG_0725.png</span>
+<span class="go">IMG_0726.png</span>
+<span class="go">IMG_0727.png</span>
+<span class="go">IMG_0728.png</span>
+<span class="go">IMG_0729.png</span>
+<span class="go">IMG_0730.png</span>
+<span class="go">IMG_0731.png</span>
+<span class="go">IMG_0732.png</span>
+<span class="go">IMG_0733.png</span>
+<span class="go">IMG_0734.png</span>
+<span class="go">IMG_0735.png</span>
+<span class="go">IMG_0736.png</span>
+<span class="go">IMG_0737.png</span>
+<span class="go">IMG_0738.png</span>
+<span class="go">IMG_0739.png</span>
+<span class="go">IMG_0740.png</span>
+<span class="go">IMG_0741.png</span>
+<span class="go">IMG_0742.png</span>
+<span class="go">IMG_0743.png</span>
+<span class="go">IMG_0744.png</span>
+<span class="go">IMG_0745.png</span>
+<span class="go">IMG_0746.png</span>
+<span class="go">IMG_0747.png</span>
+<span class="go">IMG_0748.png</span>
+<span class="go">IMG_0749.png</span>
+<span class="go">IMG_0750.png</span>
+<span class="go">IMG_0751.png</span>
+<span class="go">IMG_0752.png</span>
+<span class="go">IMG_0753.png</span>
+<span class="go">IMG_0754.png</span>
+<span class="go">IMG_0755.png</span>
+<span class="go">IMG_0756.png</span>
+<span class="go">IMG_0757.png</span>
+<span class="go">IMG_0758.png</span>
+<span class="go">IMG_0759.png</span>
+<span class="go">IMG_0760.png</span>
+<span class="go">IMG_0761.png</span>
+<span class="go">IMG_0762.png</span>
+<span class="go">IMG_0763.png</span>
+<span class="go">IMG_0764.png</span>
+<span class="go">IMG_0765.png</span>
+<span class="go">IMG_0766.png</span>
+<span class="go">IMG_0767.png</span>
+<span class="go">IMG_0768.png</span>
+<span class="go">IMG_0769.png</span>
+<span class="go">IMG_0770.png</span>
+<span class="go">IMG_0771.png</span>
+<span class="go">IMG_0772.png</span>
+<span class="go">IMG_0773.png</span>
+<span class="go">IMG_0774.png</span>
+<span class="go">IMG_0775.png</span>
+<span class="go">IMG_0776.png</span>
+<span class="go">IMG_0777.png</span>
+<span class="go">IMG_0778.png</span>
+<span class="go">IMG_0779.png</span>
+<span class="go">IMG_0780.png</span>
+<span class="go">IMG_0781.png</span>
+<span class="go">IMG_0782.png</span>
+<span class="go">IMG_0783.png</span>
+<span class="go">IMG_0784.png</span>
+<span class="go">IMG_0785.png</span>
+<span class="go">IMG_0786.png</span>
+<span class="go">IMG_0787.png</span>
+<span class="go">IMG_0788.png</span>
+<span class="go">IMG_0789.png</span>
+<span class="go">IMG_0790.png</span>
+<span class="go">IMG_0791.png</span>
+<span class="go">IMG_0792.png</span>
+<span class="go">IMG_0793.png</span>
+<span class="go">IMG_0794.png</span>
+<span class="go">IMG_0795.png</span>
+<span class="go">IMG_0796.png</span>
+<span class="go">IMG_0797.png</span>
+<span class="go">IMG_0798.png</span>
+<span class="go">IMG_0799.png</span>
+<span class="go">IMG_0800.png</span>
+<span class="go">IMG_0801.png</span>
+<span class="go">IMG_0802.png</span>
+<span class="go">IMG_0803.png</span>
+<span class="go">IMG_0804.png</span>
+<span class="go">IMG_0805.png</span>
+<span class="go">IMG_0806.png</span>
+<span class="go">IMG_0807.png</span>
+<span class="go">IMG_0808.png</span>
+<span class="go">IMG_0809.png</span>
+<span class="go">IMG_0810.png</span>
+<span class="go">IMG_0811.png</span>
+<span class="go">IMG_0812.png</span>
+<span class="go">IMG_0813.png</span>
+<span class="go">IMG_0814.png</span>
+<span class="go">IMG_0815.png</span>
+<span class="go">IMG_0816.png</span>
+<span class="go">IMG_0817.png</span>
+<span class="go">IMG_0818.png</span>
+<span class="go">IMG_0819.png</span>
+<span class="go">IMG_0820.png</span>
+<span class="go">IMG_0821.png</span>
+<span class="go">IMG_0822.png</span>
+<span class="go">IMG_0823.png</span>
+<span class="go">IMG_0824.png</span>
+<span class="go">IMG_0825.png</span>
+<span class="go">IMG_0826.png</span>
+<span class="go">IMG_0827.png</span>
+<span class="go">IMG_0828.png</span>
+<span class="go">IMG_0829.png</span>
+<span class="go">IMG_0830.png</span>
+<span class="go">IMG_0831.png</span>
+<span class="go">IMG_0832.png</span>
+<span class="go">IMG_0833.png</span>
+<span class="go">IMG_0834.png</span>
+<span class="go">IMG_0835.png</span>
+<span class="go">IMG_0836.png</span>
+<span class="go">IMG_0837.png</span>
+<span class="go">IMG_0838.png</span>
+<span class="go">IMG_0839.png</span>
+<span class="go">IMG_0840.png</span>
+<span class="go">IMG_0841.png</span>
+<span class="go">IMG_0842.png</span>
+<span class="go">IMG_0843.png</span>
+<span class="go">IMG_0844.png</span>
+<span class="go">IMG_0845.png</span>
+<span class="go">IMG_0846.png</span>
+<span class="go">IMG_0847.png</span>
+<span class="go">IMG_0848.png</span>
+<span class="go">IMG_0849.png</span>
+<span class="go">IMG_0850.png</span>
+<span class="go">IMG_0851.png</span>
+<span class="go">IMG_0852.png</span>
+<span class="go">IMG_0853.png</span>
+<span class="go">IMG_0854.png</span>
+<span class="go">IMG_0855.png</span>
+<span class="go">IMG_0856.png</span>
+<span class="go">IMG_0857.png</span>
+<span class="go">IMG_0858.png</span>
+<span class="go">IMG_0859.png</span>
+<span class="go">IMG_0860.png</span>
+<span class="go">IMG_0861.png</span>
+<span class="go">IMG_0862.png</span>
+<span class="go">IMG_0863.png</span>
+<span class="go">IMG_0864.png</span>
+<span class="go">IMG_0865.png</span>
+<span class="go">IMG_0866.png</span>
+<span class="go">IMG_0867.png</span>
+<span class="go">IMG_0868.png</span>
+<span class="go">IMG_0869.png</span>
+<span class="go">IMG_0870.png</span>
+<span class="go">IMG_0871.png</span>
+<span class="go">IMG_0872.png</span>
+<span class="go">IMG_0873.png</span>
+<span class="go">IMG_0874.png</span>
+<span class="go">IMG_0875.png</span>
+<span class="go">IMG_0876.png</span>
+<span class="go">IMG_0877.png</span>
+<span class="go">IMG_0878.png</span>
+<span class="go">IMG_0879.png</span>
+<span class="go">IMG_0880.png</span>
+<span class="go">IMG_0881.png</span>
+<span class="go">IMG_0882.png</span>
+<span class="go">IMG_0883.png</span>
+<span class="go">IMG_0884.png</span>
+<span class="go">IMG_0885.png</span>
+<span class="go">IMG_0886.png</span>
+<span class="go">IMG_0887.png</span>
+<span class="go">IMG_0888.png</span>
+<span class="go">IMG_0889.png</span>
+<span class="go">IMG_0890.png</span>
+<span class="go">IMG_0891.png</span>
+<span class="go">IMG_0892.png</span>
+<span class="go">IMG_0893.png</span>
+<span class="go">IMG_0894.png</span>
+<span class="go">IMG_0895.png</span>
+<span class="go">IMG_0896.png</span>
+<span class="go">IMG_0897.png</span>
+<span class="go">IMG_0898.png</span>
+<span class="go">IMG_0899.png</span>
+<span class="go">IMG_0900.png</span>
+<span class="go">IMG_0901.png</span>
+<span class="go">IMG_0902.png</span>
+<span class="go">IMG_0903.png</span>
+<span class="go">IMG_0904.png</span>
+<span class="go">IMG_0905.png</span>
+<span class="go">IMG_0906.png</span>
+<span class="go">IMG_0907.png</span>
+<span class="go">IMG_0908.png</span>
+<span class="go">IMG_0909.png</span>
+<span class="go">IMG_0910.png</span>
+<span class="go">IMG_0911.png</span>
+<span class="go">IMG_0912.png</span>
+<span class="go">IMG_0913.png</span>
+<span class="go">IMG_0914.png</span>
+<span class="go">IMG_0915.png</span>
+<span class="go">IMG_0916.png</span>
+<span class="go">IMG_0917.png</span>
+<span class="go">IMG_0918.png</span>
+<span class="go">IMG_0919.png</span>
+<span class="go">IMG_0920.png</span>
+<span class="go">IMG_0921.png</span>
+<span class="go">IMG_0922.png</span>
+<span class="go">IMG_0923.png</span>
+<span class="go">IMG_0924.png</span>
+<span class="go">IMG_0925.png</span>
+<span class="go">IMG_0926.png</span>
+<span class="go">IMG_0927.png</span>
+<span class="go">IMG_0928.png</span>
+<span class="go">IMG_0929.png</span>
+<span class="go">IMG_0930.png</span>
+<span class="go">IMG_0931.png</span>
+<span class="go">IMG_0932.png</span>
+<span class="go">IMG_0933.png</span>
+<span class="go">IMG_0934.png</span>
+<span class="go">IMG_0935.png</span>
+<span class="go">IMG_0936.png</span>
+<span class="go">IMG_0937.png</span>
+<span class="go">IMG_0938.png</span>
+<span class="go">IMG_0939.png</span>
+<span class="go">IMG_0940.png</span>
+<span class="go">IMG_0941.png</span>
+<span class="go">IMG_0942.png</span>
+<span class="go">IMG_0943.png</span>
+<span class="go">IMG_0944.png</span>
+<span class="go">IMG_0945.png</span>
+<span class="go">IMG_0946.png</span>
+<span class="go">IMG_0947.png</span>
+<span class="go">IMG_0948.png</span>
+<span class="go">IMG_0949.png</span>
+<span class="go">IMG_0950.png</span>
+<span class="go">IMG_0951.png</span>
+<span class="go">IMG_0952.png</span>
+<span class="go">IMG_0953.png</span>
+<span class="go">IMG_0954.png</span>
+<span class="go">IMG_0955.png</span>
+<span class="go">IMG_0956.png</span>
+<span class="go">IMG_0957.png</span>
+<span class="go">IMG_0958.png</span>
+<span class="go">IMG_0959.png</span>
+<span class="go">IMG_0960.png</span>
+<span class="go">IMG_0961.png</span>
+<span class="go">IMG_0962.png</span>
+<span class="go">IMG_0963.png</span>
+<span class="go">IMG_0964.png</span>
+<span class="go">IMG_0965.png</span>
+<span class="go">IMG_0966.png</span>
+<span class="go">IMG_0967.png</span>
+<span class="go">IMG_0968.png</span>
+<span class="go">IMG_0969.png</span>
+<span class="go">IMG_0970.png</span>
+<span class="go">IMG_0971.png</span>
+<span class="go">IMG_0972.png</span>
+<span class="go">IMG_0973.png</span>
+<span class="go">IMG_0974.png</span>
+<span class="go">IMG_0975.png</span>
+<span class="go">IMG_0976.png</span>
+<span class="go">IMG_0977.png</span>
+<span class="go">IMG_0978.png</span>
+<span class="go">IMG_0979.png</span>
+<span class="go">IMG_0980.png</span>
+<span class="go">IMG_0981.png</span>
+<span class="go">IMG_0982.png</span>
+<span class="go">IMG_0983.png</span>
+<span class="go">IMG_0984.png</span>
+<span class="go">IMG_0985.png</span>
+<span class="go">IMG_0986.png</span>
+<span class="go">IMG_0987.png</span>
+<span class="go">IMG_0988.png</span>
+<span class="go">IMG_0989.png</span>
+<span class="go">IMG_0990.png</span>
+<span class="go">IMG_0991.png</span>
+<span class="go">IMG_0992.png</span>
+<span class="go">IMG_0993.png</span>
+<span class="go">IMG_0994.png</span>
+<span class="go">IMG_0995.png</span>
+<span class="go">IMG_0996.png</span>
+<span class="go">IMG_0997.png</span>
+<span class="go">IMG_0998.png</span>
+<span class="go">IMG_0999.png</span>
+<span class="go">IMG_1000.png</span>
+<span class="go">IMG_1001.png</span>
+<span class="go">IMG_1002.png</span>
+<span class="go">IMG_1003.png</span>
+<span class="go">IMG_1004.png</span>
+<span class="go">IMG_1005.png</span>
+<span class="go">IMG_1006.png</span>
+<span class="go">IMG_1007.png</span>
+<span class="go">IMG_1008.png</span>
+<span class="go">IMG_1009.png</span>
+<span class="go">IMG_1010.png</span>
+<span class="go">IMG_1011.png</span>
+<span class="go">IMG_1012.png</span>
+<span class="go">IMG_1013.png</span>
+<span class="go">IMG_1014.png</span>
+<span class="go">IMG_1015.png</span>
+<span class="go">IMG_1016.png</span>
+<span class="go">IMG_1017.png</span>
+<span class="go">IMG_1018.png</span>
+<span class="go">IMG_1019.png</span>
+<span class="go">IMG_1020.png</span>
+<span class="go">IMG_1021.png</span>
+<span class="go">IMG_1022.png</span>
+<span class="go">IMG_1023.png</span>
+<span class="go">IMG_1024.png</span>
+<span class="go">IMG_1025.png</span>
+<span class="go">IMG_1026.png</span>
+<span class="go">IMG_1027.png</span>
+<span class="go">IMG_1028.png</span>
+<span class="go">IMG_1029.png</span>
+<span class="go">IMG_1030.png</span>
+<span class="go">IMG_1031.png</span>
+<span class="go">IMG_1032.png</span>
+<span class="go">IMG_1033.png</span>
+<span class="go">IMG_1034.png</span>
+<span class="go">IMG_1035.png</span>
+<span class="go">IMG_1036.png</span>
+<span class="go">IMG_1037.png</span>
+<span class="go">IMG_1038.png</span>
+<span class="go">IMG_1039.png</span>
+<span class="go">IMG_1040.png</span>
+<span class="go">IMG_1041.png</span>
+<span class="go">IMG_1042.png</span>
+<span class="go">IMG_1043.png</span>
+<span class="go">IMG_1044.png</span>
+<span class="go">IMG_1045.png</span>
+<span class="go">IMG_1046.png</span>
+<span class="go">IMG_1047.png</span>
+<span class="go">IMG_1048.png</span>
+<span class="go">IMG_1049.png</span>
+<span class="go">IMG_1050.png</span>
+<span class="go">IMG_1051.png</span>
+<span class="go">IMG_1052.png</span>
+<span class="go">IMG_1053.png</span>
+<span class="go">IMG_1054.png</span>
+<span class="go">IMG_1055.png</span>
+<span class="go">IMG_1056.png</span>
+<span class="go">IMG_1057.png</span>
+<span class="go">IMG_1058.png</span>
+<span class="go">IMG_1059.png</span>
+<span class="go">IMG_1060.png</span>
+<span class="go">IMG_1061.png</span>
+<span class="go">IMG_1062.png</span>
+<span class="go">IMG_1063.png</span>
+<span class="go">IMG_1064.png</span>
+<span class="go">IMG_1065.png</span>
+<span class="go">IMG_1066.png</span>
+<span class="go">IMG_1067.png</span>
+<span class="go">IMG_1068.png</span>
+<span class="go">IMG_1069.png</span>
+<span class="go">IMG_1070.png</span>
+<span class="go">IMG_1071.png</span>
+<span class="go">IMG_1072.png</span>
+<span class="go">IMG_1073.png</span>
+<span class="go">IMG_1074.png</span>
+<span class="go">IMG_1075.png</span>
+<span class="go">IMG_1076.png</span>
+<span class="go">IMG_1077.png</span>
+<span class="go">IMG_1078.png</span>
+<span class="go">IMG_1079.png</span>
+<span class="go">IMG_1080.png</span>
+<span class="go">IMG_1081.png</span>
+<span class="go">IMG_1082.png</span>
+<span class="go">IMG_1083.png</span>
+<span class="go">IMG_1084.png</span>
+<span class="go">IMG_1085.png</span>
+<span class="go">IMG_1086.png</span>
+<span class="go">IMG_1087.png</span>
+<span class="go">IMG_1088.png</span>
+<span class="go">IMG_1089.png</span>
+<span class="go">IMG_1090.png</span>
+<span class="go">IMG_1091.png</span>
+<span class="go">IMG_1092.png</span>
+<span class="go">IMG_1093.png</span>
+<span class="go">IMG_1094.png</span>
+<span class="go">IMG_1095.png</span>
+<span class="go">IMG_1096.png</span>
+<span class="go">IMG_1097.png</span>
+<span class="go">IMG_1098.png</span>
+<span class="go">IMG_1099.png</span>
+<span class="go">IMG_1100.png</span>
+<span class="go">IMG_1101.png</span>
+<span class="go">IMG_1102.png</span>
+<span class="go">IMG_1103.png</span>
+<span class="go">IMG_1104.png</span>
+<span class="go">IMG_1105.png</span>
+<span class="go">IMG_1106.png</span>
+<span class="go">IMG_1107.png</span>
+<span class="go">IMG_1108.png</span>
+<span class="go">IMG_1109.png</span>
+<span class="go">IMG_1110.png</span>
+<span class="go">IMG_1111.png</span>
+<span class="go">IMG_1112.png</span>
+<span class="go">IMG_1113.png</span>
+<span class="go">IMG_1114.png</span>
+<span class="go">IMG_1115.png</span>
+<span class="go">IMG_1116.png</span>
+<span class="go">IMG_1117.png</span>
+<span class="go">IMG_1118.png</span>
+<span class="go">IMG_1119.png</span>
+<span class="go">IMG_1120.png</span>
+<span class="go">IMG_1121.png</span>
+</pre></div>
+<p>There are a lot of images, apparently all of the same size. We can try
+to use pngtools the examine the respect of image attributes and the
+presence of&nbsp;metadata.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> pnginfo IMG_1116.png
+<span class="go">IMG_1116.png...</span>
+<span class="go">Image Width: 118 Image Length: 810</span>
+<span class="go">Bitdepth (Bits/Sample): 8</span>
+<span class="go">Channels (Samples/Pixel): 4</span>
+<span class="go">Pixel depth (Pixel Depth): 32</span>
+<span class="go">Colour Type (Photometric Interpretation): RGB with alpha channel</span>
+<span class="go">Image filter: Single row per byte filter</span>
+<span class="go">Interlacing: No interlacing</span>
+<span class="go">Compression Scheme: Deflate method 8, 32k window</span>
+<span class="go">Resolution: 0, 0 (unit unknown)</span>
+<span class="go">FillOrder: msb-to-lsb</span>
+<span class="go">Byte Order: Network (Big Endian)</span>
+<span class="go">Number of text strings: 0 of 0</span>
+</pre></div>
+<p>There are no interesting metadata. But it seems that each image contains
+some pixels, we can try to compose all the&nbsp;images.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> convert -background skyblue *.png -layers flatten +repage
+<span class="go">Flatten.png</span>
+</pre></div>
+<p>And inside there is the key: <a class="reference external" href="http://is.gd/ced7F">http://is.gd/ced7F</a></p>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jekil.sexy/tag/ctf.html">CTF</a>
+      <a href="https://jekil.sexy/tag/defcon.html">DEFCON</a>
+      <a href="https://jekil.sexy/tag/quals.html">quals</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jekilsexy';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

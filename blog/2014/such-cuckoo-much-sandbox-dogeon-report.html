@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="jekil" />
+<meta name="description" content="Several days ago I discovered one of the best projects of this year: dogeon. DSON (Doge Serialized Object Notation) is a data-interchange format, that is easy to read and write for Shiba Inu dogs. It is easy for machines to parse and generate. It is designed to be as similiar as possible to the `DogeScript Programming Language <https://github.com/remixz/dogescript>`__. DSON is a text format that is not language independent but uses conventions that are familiar to a wide variety of japanese dog breeds. These properties make DSON an ideal data-interchange language for everything that involves Shiba …" />
+<meta name="keywords" content="cuckoo, doge">
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:title" content="Such Cuckoo, much sandbox: dogeon report"/>
+<meta property="og:description" content="Several days ago I discovered one of the best projects of this year: dogeon. DSON (Doge Serialized Object Notation) is a data-interchange format, that is easy to read and write for Shiba Inu dogs. It is easy for machines to parse and generate. It is designed to be as similiar as possible to the `DogeScript Programming Language <https://github.com/remixz/dogescript>`__. DSON is a text format that is not language independent but uses conventions that are familiar to a wide variety of japanese dog breeds. These properties make DSON an ideal data-interchange language for everything that involves Shiba …"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy/blog/2014/such-cuckoo-much-sandbox-dogeon-report.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2014-06-08 23:07:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jekil.sexy/author/jekil.html">
+<meta property="article:section" content="Tools"/>
+<meta property="article:tag" content="cuckoo"/>
+<meta property="article:tag" content="doge"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash; Such Cuckoo, much sandbox: dogeon report</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="such-cuckoo-much-sandbox-dogeon-report">Such Cuckoo, much sandbox: dogeon&nbsp;report</h1>
+    <p>
+          Posted on June 08, 2014 in <a href="https://jekil.sexy/category/tools.html">Tools</a>
+
+
+        &#8226; 2 min read
+    </p>
+  </header>
+  <div>
+    <p>Several days ago I discovered one of the best projects of this year:
+<a class="reference external" href="http://dogeon.org/">dogeon</a>.</p>
+<p><em><span class="caps">DSON</span> (Doge Serialized Object Notation) is a data-interchange format,
+that is easy to read and write for Shiba Inu dogs. It is easy for
+machines to parse and generate. It is designed to be as similiar as
+possible to the `DogeScript Programming
+Language &lt;https://github.com/remixz/dogescript&gt;`__. <span class="caps">DSON</span> is a text
+format that is not language independent but uses conventions that are
+familiar to a wide variety of japanese dog breeds. These properties make
+<span class="caps">DSON</span> an ideal data-interchange language for everything that involves
+Shiba Inu&nbsp;intercommunication.</em></p>
+<p><a class="reference external" href="http://cuckoosandbox.org">Cuckoo</a> is such sandbox, lol&nbsp;malware,
+&nbsp;very sandbox. So, I did&nbsp;it.</p>
+<p>First of all I found this <a class="reference external" href="https://github.com/soasme/dogeon">great
+library</a> written in Python,
+because of Shiba Inu&nbsp;code&nbsp;Python.</p>
+<p>Writing modules in Cuckoo is amazingly easy, check out the documentation
+about reporting
+modules:&nbsp;<a class="reference external" href="http://docs.cuckoosandbox.org/en/latest/customization/reporting/">http://docs.cuckoosandbox.org/en/latest/customization/reporting/</a></p>
+<p>I used &nbsp;json module as a starting point, changing just a few lines, I
+imported dogeon library and used it to dump the Cuckoo results dict.
+This is the code (available on
+<a class="reference external" href="https://github.com/jekil/cuckoo-fu/blob/master/modules/reporting/dogeon.py">Github</a>&nbsp;too):</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">dson</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+
+<span class="kn">from</span> <span class="nn">lib.cuckoo.common.abstracts</span> <span class="kn">import</span> <span class="n">Report</span>
+<span class="kn">from</span> <span class="nn">lib.cuckoo.common.exceptions</span> <span class="kn">import</span> <span class="n">CuckooReportError</span>
+
+<span class="k">class</span> <span class="nc">DogeonDump</span><span class="p">(</span><span class="n">Report</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reports_path</span><span class="p">,</span> <span class="s2">&quot;report.doge&quot;</span><span class="p">)</span>
+            <span class="n">report</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">dson</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">UnicodeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CuckooReportError</span><span class="p">(</span><span class="s2">&quot;Failed to generate Dogeon report: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span>
+</pre></div>
+<p>To install this setup requirements&nbsp;with:</p>
+<div class="highlight"><pre><span></span><span class="go">pip install dogeon</span>
+</pre></div>
+<p>Copy the reporting module in reporting modules folder, in
+/modules/reporting. Enable it adding the following lines to
+reporting.conf, in&nbsp;/conf/reporting.conf:</p>
+<div class="highlight"><pre><span></span>[dogeon]
+enabled = yes
+</pre></div>
+<p>Run cuckoo and a report will be&nbsp;like:</p>
+<div class="highlight"><pre><span></span>such
+    &quot;info&quot; is such
+        &quot;category&quot; is &quot;file&quot;,
+        &quot;package&quot; is &quot;&quot;,
+        &quot;started&quot; is &quot;2014-06-08 17:52:53&quot;,
+        &quot;custom&quot; is &quot;&quot;,
+        &quot;machine&quot; is such
+            &quot;shutdown_on&quot; is &quot;2014-06-08 17:53:58&quot;,
+            &quot;label&quot; is &quot;cuckoo01&quot;,
+            &quot;manager&quot; is &quot;VirtualBox&quot;,
+            &quot;started_on&quot; is &quot;2014-06-08 17:52:53&quot;,
+            &quot;id&quot; is 1,
+            &quot;name&quot; is &quot;cuckooosx&quot;
+        wow,
+        &quot;ended&quot; is &quot;2014-06-08 17:53:58&quot;,
+        &quot;version&quot; is &quot;1.2-dev&quot;,
+        &quot;duration&quot; is 65,
+        &quot;id&quot; is 1
+    wow,
+    &quot;signatures&quot; is so many,
+    &quot;static&quot; is such wow,
+    &quot;dropped&quot; is so
+        such
+            &quot;yara&quot; is so many,
+[snip...]
+</pre></div>
+<p>Please, use doge power with&nbsp;care.</p>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jekil.sexy/tag/cuckoo.html">cuckoo</a>
+      <a href="https://jekil.sexy/tag/doge.html">doge</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jekilsexy';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

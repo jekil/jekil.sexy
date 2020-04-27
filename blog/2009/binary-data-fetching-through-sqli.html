@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="jekil" />
+<meta name="description" content="Table of contents 1. Introduction 2. How BLOB storage works 3. Casting binary data 3.1 MySQL 3.2 PostgreSQL 3.3 SQL Server 4. References 1. Introduction Exploiting a SQL injection flaw in a web application can give the attacker full control of the remote DBMS. One of the major consequences of exploiting consists in fetching all or part of the data stored in the database. In several cases, like a web application that stores images on the database, the attacker has to deal with binary data. Follows some techniques to fetch binary data via a SQL injection flaw …" />
+<meta name="keywords" content="binary data, blob, data casting, SQL Injection">
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:title" content="Binary data fetching through SQLi"/>
+<meta property="og:description" content="Table of contents 1. Introduction 2. How BLOB storage works 3. Casting binary data 3.1 MySQL 3.2 PostgreSQL 3.3 SQL Server 4. References 1. Introduction Exploiting a SQL injection flaw in a web application can give the attacker full control of the remote DBMS. One of the major consequences of exploiting consists in fetching all or part of the data stored in the database. In several cases, like a web application that stores images on the database, the attacker has to deal with binary data. Follows some techniques to fetch binary data via a SQL injection flaw …"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy/blog/2009/binary-data-fetching-through-sqli.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2009-02-23 22:45:00+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jekil.sexy/author/jekil.html">
+<meta property="article:section" content="Research"/>
+<meta property="article:tag" content="binary data"/>
+<meta property="article:tag" content="blob"/>
+<meta property="article:tag" content="data casting"/>
+<meta property="article:tag" content="SQL Injection"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash; Binary data fetching through SQLi</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="binary-data-fetching-through-sqli">Binary data fetching through&nbsp;SQLi</h1>
+    <p>
+          Posted on February 23, 2009 in <a href="https://jekil.sexy/category/research.html">Research</a>
+
+
+        &#8226; 5 min read
+    </p>
+  </header>
+  <div>
+    <div class="section" id="table-of-contents">
+<h2>Table of&nbsp;contents</h2>
+<div class="line-block">
+<div class="line">1. Introduction</div>
+<div class="line">2. How <span class="caps">BLOB</span> storage works</div>
+<div class="line">3. Casting binary data</div>
+<div class="line">3.1 MySQL</div>
+<div class="line">3.2 PostgreSQL</div>
+<div class="line">3.3 <span class="caps">SQL</span> Server</div>
+<div class="line">4. References</div>
+</div>
+</div>
+<div class="section" id="introduction">
+<h2>1.&nbsp;Introduction</h2>
+<p>Exploiting a <span class="caps">SQL</span> injection flaw in a web application can give the
+attacker full control of the remote <span class="caps">DBMS</span>. One of the major consequences
+of exploiting consists in fetching all or part of the data stored in the&nbsp;database.</p>
+<p>In several cases, like a web application that stores images on the
+database, the attacker has to deal with binary&nbsp;data.</p>
+<p>Follows some techniques to fetch binary data via a <span class="caps">SQL</span> injection&nbsp;flaw.</p>
+</div>
+<div class="section" id="how-blob-storage-works">
+<h2>2. How <span class="caps">BLOB</span> storage&nbsp;works</h2>
+<p>According to Wikipedia a <span class="caps">BLOB</span>[1]&nbsp;is:</p>
+<blockquote>
+<p>A binary large object, also known as a blob, is a collection of
+binary data stored as a single entity in a database management
+system. Blobs are typically images, audio or other multimedia
+objects, though sometimes binary executable code is stored as a
+blob. Database support for blobs is not&nbsp;universal.</p>
+<p>Blobs were originally just amorphous chunks of data invented by Jim
+Starkey at <span class="caps">DEC</span>, who describes them as &#8220;the thing that ate
+Cincinnati, Cleveland, or whatever&#8221;. Later, Terry McKiever, a
+marketing person for Apollo felt that it needed to be an acronym and
+invented the backronym Basic Large Object. Then Informix invented an
+alternative backronym, Binary Large Object. Today many people
+believe that blob was originally intended as an acronym for&nbsp;something.</p>
+</blockquote>
+<p>The <span class="caps">BLOB</span> data can be stored in the <span class="caps">DBMS</span> tables or as usual file system
+files linked by a pointer in the data table.&nbsp; The <span class="caps">BLOB</span> storage engine
+is built with one or a combination of these techniques to get the best&nbsp;performances.</p>
+<p>The <span class="caps">BLOB</span> storage is handled by the <span class="caps">DBMS</span> engine that provides high level
+<span class="caps">SQL</span> statement to the&nbsp;user.</p>
+</div>
+<div class="section" id="casting-binary-data">
+<h2>3. Casting Binary&nbsp;data</h2>
+<p>The idea behind the hack is to cast the <span class="caps">BLOB</span> data to another data-type
+that can be fetched via SQLi. For example: cast a <span class="caps">BLOB</span> to a string
+containing the <span class="caps">BLOB</span> encoded in base64, so we can use a string
+representation of binary object that acts as middleware to fetch data
+over any type of <span class="caps">SQL</span>&nbsp;injection.</p>
+<p>As far as I know there are no public automatic <span class="caps">SQL</span> injection tools that
+can fetch binary data from a vulnerable web&nbsp;application.</p>
+</div>
+<div class="section" id="mysql">
+<h2>3.1&nbsp;MySQL</h2>
+<p>In MySQL <span class="caps">SQL</span> syntax the function <span class="caps">HEX</span>()[2] can be used to get the
+hexadecimal value of one field of any data-type. The function
+<span class="caps">HEX</span>(`foo`) returns a string representation of the hexadecimal value of
+foo, where foo is a binary large object (<span class="caps">BLOB</span>). So we can cast a binary
+data-type to a string&nbsp;data-type.</p>
+<p>For example the following <span class="caps">SQL</span> statement returns the hexadecimal value of
+the binary object stored in the field named&nbsp;blob:</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="nf">HEX</span><span class="p">(</span><span class="ss">`blob`</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">footable</span><span class="p">;</span>
+</pre></div>
+<p>Now we can use the hexadecimal <span class="caps">BLOB</span> representation to fetch data from
+binary (<span class="caps">BLOB</span>) fields using the standard techniques to fetch data via <span class="caps">SQL</span>
+injection or blind <span class="caps">SQL</span>&nbsp;injection.</p>
+<p>Using <span class="caps">HEX</span>() we can deal a <span class="caps">BLOB</span> as a text string and use the common
+techniques and&nbsp;tools.</p>
+<p>Once we have fetched the binary data encoded as hexadecimal, we have to
+restore the original binary data out of it. We can use the <span class="caps">SQL</span> <span class="caps">UNHEX</span>()
+function, that get a hexadecimal string and outputs a <span class="caps">BLOB</span> object, a
+command line utility or a few lines in you favorite programming language
+can do the&nbsp;trick.</p>
+<p>This is the easy way to get a textual representation of <span class="caps">BLOB</span> under
+MySQL, the <span class="caps">HEX</span>() function is supported from MySQL&nbsp;4.1.</p>
+</div>
+<div class="section" id="postgresql">
+<h2>4.2&nbsp;PostgreSQL</h2>
+<p>PostgreSQL can not store values of more than several thousands bytes
+within any data-type except large objects, nor can binary data be easily
+entered within single quotes. Instead, large objects (<span class="caps">BLOB</span>) are used to
+store very large values and binary&nbsp;data.</p>
+<p><span class="caps">BLOB</span> permits storage of any operating system file, including images or
+large text files, directly into the&nbsp;database.</p>
+<p>As you can see in the <span class="caps">DBMS</span> data-type comparison sheet[3] PostgreSQL
+stores <span class="caps">BLOB</span> data in a data-type called <span class="caps">OID</span> that acts like a pointer to
+the stored object on the file&nbsp;system.</p>
+<p>For example using the psql client from command line you can load the
+file into the database using lo_import(), and retrieve it from the
+database using lo_export() which works only for local&nbsp;files[4].</p>
+<div class="highlight"><pre><span></span><span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">foo</span> <span class="p">(</span><span class="n">image</span> <span class="n">OID</span><span class="p">);</span>
+<span class="go">CREATE TABLE</span>
+<span class="gp">postgres=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">foo</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">lo_import</span><span class="p">(</span><span class="s1">&#39;/tmp/bar.jpg&#39;</span><span class="p">));</span>
+<span class="go">INSERT 0 1</span>
+</pre></div>
+<p>The lo_import() function stores /tmp/bar.jpg into the database. The
+function call returns an <span class="caps">OID</span> that is used to refer the imported large
+object. This value is stored in foo.image as an&nbsp;integer.</p>
+<p>If you want to read the foo.image value the lo_export() function uses
+the <span class="caps">OID</span> value to find the large object stored in the database, then
+places the exported file into the output&nbsp;file.</p>
+<p>Full path names must be used with large objects because the database
+server runs in a different directory than the psql client. Files are
+imported and exported by the postgres user, so postgres must have
+permission to read the file for lo_import() and directory write
+permission for&nbsp;lo_export().</p>
+<p>There are others functions to manage large objects (<span class="caps">BLOB</span>) available
+under&nbsp;PostreSQL[5].</p>
+<p>Because large objects uses the local filesystem, users connecting over a
+network can not use lo_import() or lo_export(). They can, however, use
+psql&#8217;s \lo_import and \lo_export&nbsp;commands.</p>
+<p>If we are exploiting a <span class="caps">SQL</span> injection in a web application we can&#8217;t use
+the functions lo_import() and lo_export() but we need a way to get the
+juice data on the vulnerable&nbsp;server.</p>
+<p>From PostgreSQL documentation &#8220;String Functions and Operators&#8221;[6] we
+catch the function <span class="caps">ENCODE</span>(data bytea, type&nbsp;text).</p>
+<p>This function encodes binary data to an <span class="caps">ASCII</span>-only representation. The
+supported types are: base64, hex,&nbsp;escape.</p>
+<p>Now we have the function to convert a bytea data-type into a base64 or
+hex string. We need only to convert the <span class="caps">BLOB</span> <span class="caps">OID</span> in a&nbsp;bytea.</p>
+<p>The fastest way to do this is a two step recipe: first get the number of
+<span class="caps">OID</span> that you need and after quering the system table&nbsp;pg_largeobject.</p>
+<div class="highlight"><pre><span></span><span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">image</span> <span class="k">FROM</span> <span class="n">foo</span><span class="p">;</span>
+<span class="go">image</span>
+<span class="go">——-</span>
+<span class="go">16387</span>
+<span class="go">(1 row)</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">ENCODE</span><span class="p">(</span><span class="k">data</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">pg_largeobject</span> <span class="k">WHERE</span> <span class="n">LOID</span><span class="o">=</span><span class="mf">16387</span><span class="p">;</span>
+<span class="go">encode</span>
+<span class="go">——————————————————————————</span>
+<span class="go">JVBERi0xLjINJeLjz9MNCjIwOSAwIG9iag08PCANL0xpbmVhcml6ZWQgMSAN</span>
+<span class="go">IDYyOCA4NTEgXSANL0wgMjU4NDYxOCANL0UgMTI5NDg1IA0vTiAxNiANL</span>
+<span class="go">DWVuZG9iag0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC</span>
+<span class="go">[snip..]</span>
+<span class="go">M2I4MWJkNTdlOTNjNWVmNj5dDT4+DXN0YXJ0eHJlZg0xNzMNJSVFT0YN</span>
+<span class="go">(1263 rows)</span>
+</pre></div>
+<p>Now you get your goal and you can fetch a <span class="caps">BLOB</span> on PostgreSQL with only
+two&nbsp;queries.</p>
+<p>For further details on PostgreSQL <span class="caps">BLOB</span> functions you can refer to &#8220;SQLi:
+Writing files to disk under&nbsp;PostgreSQL&#8221;[7].</p>
+</div>
+<div class="section" id="sql-server">
+<h2>3.3 <span class="caps">SQL</span>&nbsp;Server</h2>
+<p><span class="caps">SQL</span> Server stores binary data in the following data-types: <span class="caps">BINARY</span>,
+<span class="caps">VARBINARY</span>, <span class="caps">IMAGE</span>.</p>
+<p>You can create a demo table for your test&nbsp;with:</p>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">dbo</span><span class="p">.</span><span class="n">foo</span>
+<span class="p">(</span>
+<span class="n">image</span> <span class="n">image</span> <span class="k">NULL</span>
+<span class="p">)</span>  <span class="k">ON</span> <span class="p">[</span><span class="k">PRIMARY</span><span class="p">]</span>
+<span class="n">TEXTIMAGE_ON</span> <span class="p">[</span><span class="k">PRIMARY</span><span class="p">]</span>
+<span class="k">GO</span>
+</pre></div>
+<p>You can insert the file foo.bmp with the&nbsp;following:</p>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="p">[</span><span class="n">tempdb</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">foo</span><span class="p">]</span>
+<span class="p">([</span><span class="n">image</span><span class="p">])</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span>
+<span class="n">OPENROWSET</span><span class="p">(</span><span class="n">BULK</span> <span class="n">N</span><span class="s1">&#39;C:\foo.bmp&#39;</span><span class="p">,</span> <span class="n">SINGLE_BLOB</span><span class="p">)</span> <span class="k">AS</span> <span class="n">i</span>
+<span class="k">GO</span>
+</pre></div>
+<p>The binary data can be converted to a hex string injecting a stored
+procedure in <span class="caps">SQL</span> Server. This is described in Microsoft&nbsp;kb104829[8].</p>
+<div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">procedure</span> <span class="n">sp_hexadecimal</span>
+<span class="o">@</span><span class="n">binvalue</span> <span class="n">varbinary</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="k">as</span>
+<span class="k">declare</span> <span class="o">@</span><span class="n">charvalue</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="k">declare</span> <span class="o">@</span><span class="n">i</span> <span class="nb">int</span>
+<span class="k">declare</span> <span class="o">@</span><span class="k">length</span> <span class="nb">int</span>
+<span class="k">declare</span> <span class="o">@</span><span class="n">hexstring</span> <span class="nb">char</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="k">select</span> <span class="o">@</span><span class="n">charvalue</span> <span class="o">=</span> <span class="s1">&#39;0x&#39;</span>
+<span class="k">select</span> <span class="o">@</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">select</span> <span class="o">@</span><span class="k">length</span> <span class="o">=</span> <span class="n">datalength</span><span class="p">(</span><span class="o">@</span><span class="n">binvalue</span><span class="p">)</span>
+<span class="k">select</span> <span class="o">@</span><span class="n">hexstring</span> <span class="o">=</span> <span class="ss">&quot;0123456789abcdef&quot;</span>
+
+<span class="n">while</span> <span class="p">(</span><span class="o">@</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="o">@</span><span class="k">length</span><span class="p">)</span>
+<span class="k">begin</span>
+
+<span class="k">declare</span> <span class="o">@</span><span class="n">tempint</span> <span class="nb">int</span>
+<span class="k">declare</span> <span class="o">@</span><span class="n">firstint</span> <span class="nb">int</span>
+<span class="k">declare</span> <span class="o">@</span><span class="n">secondint</span> <span class="nb">int</span>
+
+<span class="k">select</span> <span class="o">@</span><span class="n">tempint</span> <span class="o">=</span> <span class="k">convert</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="k">substring</span><span class="p">(</span><span class="o">@</span><span class="n">binvalue</span><span class="p">,</span><span class="o">@</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">select</span> <span class="o">@</span><span class="n">firstint</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="o">@</span><span class="n">tempint16</span><span class="p">)</span>
+<span class="k">select</span> <span class="o">@</span><span class="n">secondint</span> <span class="o">=</span> <span class="o">@</span><span class="n">tempint</span> <span class="o">-</span> <span class="p">(</span><span class="o">@</span><span class="n">firstint</span><span class="o">*</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="k">select</span> <span class="o">@</span><span class="n">charvalue</span> <span class="o">=</span> <span class="o">@</span><span class="n">charvalue</span> <span class="o">+</span>
+<span class="k">substring</span><span class="p">(</span><span class="o">@</span><span class="n">hexstring</span><span class="p">,</span> <span class="o">@</span><span class="n">firstint</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span>
+<span class="k">substring</span><span class="p">(</span><span class="o">@</span><span class="n">hexstring</span><span class="p">,</span> <span class="o">@</span><span class="n">secondint</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">select</span> <span class="o">@</span><span class="n">i</span> <span class="o">=</span> <span class="o">@</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">end</span>
+
+<span class="k">select</span> <span class="s1">&#39;sp_hexadecimal&#39;</span><span class="o">=@</span><span class="n">charvalue</span>
+</pre></div>
+</div>
+<div class="section" id="other-dbms">
+<h2>3.4 Other <span class="caps">DBMS</span></h2>
+<p>The same technique can be used in any other <span class="caps">DBMS</span> like Oracle, <span class="caps">DB2</span>,
+Informix that have casting functions or <span class="caps">BLOB</span> conversion&nbsp;functions.</p>
+</div>
+<div class="section" id="references">
+<h2>4.&nbsp;References</h2>
+<div class="line-block">
+<div class="line">[1] <a class="reference external" href="http://en.wikipedia.org/wiki/Binary_large_object">http://en.wikipedia.org/wiki/Binary_large_object</a></div>
+<div class="line">[2] <a class="reference external" href="http://dev.mysql.com/doc/mysql/en/String_functions.html">http://dev.mysql.com/doc/mysql/en/String_functions.html</a></div>
+<div class="line">[3]
+<a class="reference external" href="http://www.lonerunners.net/1246-database-datatype-comparison-sheet.html">http://www.lonerunners.net/1246-database-datatype-comparison-sheet.html</a></div>
+<div class="line">[4]
+<a class="reference external" href="http://www.postgresql.org/files/documentation/books/aw_pgsql/node96.html">http://www.postgresql.org/files/documentation/books/aw_pgsql/node96.html</a></div>
+<div class="line">[5] <a class="reference external" href="http://www.postgresql.org/docs/8.3/interactive/largeobjects.html">http://www.postgresql.org/docs/8.3/interactive/largeobjects.html</a></div>
+<div class="line">[6]
+<a class="reference external" href="http://www.postgresql.org/docs/8.1/interactive/functions-string.html">http://www.postgresql.org/docs/8.1/interactive/functions-string.html</a></div>
+<div class="line">[7]
+<a class="reference external" href="http://lab.lonerunners.net/blog/sqli-writing-files-to-disk-under-postgresql">http://lab.lonerunners.net/blog/sqli-writing-files-to-disk-under-postgresql</a></div>
+<div class="line">[8] <a class="reference external" href="http://support.microsoft.com/kb/104829">http://support.microsoft.com/kb/104829</a></div>
+</div>
+</div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jekil.sexy/tag/binary-data.html">binary data</a>
+      <a href="https://jekil.sexy/tag/blob.html">blob</a>
+      <a href="https://jekil.sexy/tag/data-casting.html">data casting</a>
+      <a href="https://jekil.sexy/tag/sql-injection.html">SQL Injection</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jekilsexy';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="jekil" />
+<meta name="description" content="The Ush.it team published the second part of “PHP Filesystem Attack Vectors” paper. The original paper is available here and you can download it here. PHP filesystem attack vectors - Take Two Name PHP filesystem attack vectors - Take Two Systems Affected PHP and PHP+Suhosin Vendor http://www.php.net/ Advisory http://www_ush_it/team/ush/hack-phpfs/phpfs_mad_2.txt Authors Giovanni "evilaliv3" Pellerano (evilaliv3 AT ush DOT it) Antonio "s4tan" Parata (s4tan AT ush DOT it) Francesco "ascii" Ongaro (ascii AT ush DOT it) Alessandro "jekil" Tanasi (alessandro AT tanasi DOT it) Date 20090725 I) Introduction II) PHP arbitrary Local File …" />
+<meta name="keywords" content="attack vector, filesystem, PHP">
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:title" content="PHP Filesystem Attack Vectors @ Ush.it"/>
+<meta property="og:description" content="The Ush.it team published the second part of “PHP Filesystem Attack Vectors” paper. The original paper is available here and you can download it here. PHP filesystem attack vectors - Take Two Name PHP filesystem attack vectors - Take Two Systems Affected PHP and PHP+Suhosin Vendor http://www.php.net/ Advisory http://www_ush_it/team/ush/hack-phpfs/phpfs_mad_2.txt Authors Giovanni "evilaliv3" Pellerano (evilaliv3 AT ush DOT it) Antonio "s4tan" Parata (s4tan AT ush DOT it) Francesco "ascii" Ongaro (ascii AT ush DOT it) Alessandro "jekil" Tanasi (alessandro AT tanasi DOT it) Date 20090725 I) Introduction II) PHP arbitrary Local File …"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy/blog/2009/php-filesystem-attack-vectors-ush-it.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2009-07-28 21:30:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jekil.sexy/author/jekil.html">
+<meta property="article:section" content="Research"/>
+<meta property="article:tag" content="attack vector"/>
+<meta property="article:tag" content="filesystem"/>
+<meta property="article:tag" content="PHP"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash; PHP Filesystem Attack Vectors @ Ush.it</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="php-filesystem-attack-vectors-ush-it"><span class="caps">PHP</span> Filesystem Attack Vectors &#64;&nbsp;Ush.it</h1>
+    <p>
+          Posted on July 28, 2009 in <a href="https://jekil.sexy/category/research.html">Research</a>
+
+
+        &#8226; 7 min read
+    </p>
+  </header>
+  <div>
+    <p>The <a class="reference external" href="http://www.ush.it">Ush.it</a> team published the second part of
+&#8220;<a class="reference external" href="http://www.ush.it/2009/02/08/php-filesystem-attack-vectors/"><span class="caps">PHP</span> Filesystem Attack
+Vectors</a>&#8221;
+paper. The original paper
+is available <a class="reference external" href="http://www.ush.it/2009/07/26/php-filesystem-attack-vectors-take-two/">here</a> and you can download it <a class="reference external" href="https://jekil.sexy/public/advisory/phpfs_mad-2009/phpfs_mad_2.txt">here</a>.</p>
+<div class="highlight"><pre><span></span>PHP filesystem attack vectors - Take Two
+
+ Name              PHP filesystem attack vectors - Take Two
+ Systems Affected  PHP and PHP+Suhosin
+ Vendor            http://www.php.net/
+ Advisory          http://www_ush_it/team/ush/hack-phpfs/phpfs_mad_2.txt
+ Authors           Giovanni &quot;evilaliv3&quot; Pellerano (evilaliv3 AT ush DOT it)
+                   Antonio &quot;s4tan&quot; Parata (s4tan AT ush DOT it)
+                   Francesco &quot;ascii&quot; Ongaro (ascii AT ush DOT it)
+                   Alessandro &quot;jekil&quot; Tanasi (alessandro AT tanasi DOT it)
+ Date              20090725
+
+I)    Introduction
+II)   PHP arbitrary Local File Inclusion testing
+III)  PHP arbitrary Local File Inclusion results
+IV)   PHP arbitrary File Open testing
+V)    PHP arbitrary File Open results
+VI)   PHP arbitrary Remote File Upload testing
+VII)  PHP arbitrary Remote File Upload results
+VIII) Conclusions
+IX)   References
+
+I) Introduction
+
+This is the second part and continuation of our previous &quot;PHP filesystem
+attack vectors&quot; [1] research.
+
+Working with s4tan and ascii on the &quot;SugarCRM 5.2.0e Remote Code
+Execution&quot; advisory [2] we noticed a strange behaviour on Windows OS:
+trying to upload a file named &quot;a.php.&quot; results in just &quot;a.php&quot;.
+
+Analyzing this we noticed that every time an application, or manually,
+was trying to open or save a file with one ore more dots at the end,
+Windows was not denying the operation, but it was removing the dots in a
+transparent way.
+
+Mindful readers probably have already spotted the issue.
+
+We wanted to take our time for a deeper investigation about what
+normalization issues were available and how to take advantage of them
+in order to exploit arbitrary local file inclusion/handling and uploads
+functionalities (not only on Windows OS but also on GNU/Linux and *BSD).
+
+Below you can find the sources of two simple &quot;academic&quot; fuzzers, later
+results are discussed and finally POCs and conclusions are proposed.
+
+II) PHP arbitrary Local File Inclusion testing
+
+This tests include(), include_once(), require(), require_once() and
+similiar functions.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+alfi_fuzzer.php:
+
+&lt;?php
+
+error_reporting(0);
+
+$InterestingFile = &quot;test_alfi.php&quot;;
+$fh = @fopen($InterestingFile, &#39;w+&#39;);
+fwrite($fh, &quot;&lt;?php ?&gt;&quot;);
+fclose($fh);
+
+for ($i = 1; $i &lt; 256; $i++) {
+ $chri = chr($i);
+ for ($j = 0; $j &lt; 256; $j++) {
+  $chrj = chr($j);
+  for ($k = 0; $k &lt; 256; $k++) {
+    $chrk = chr($k);
+    if($chri.$chrj.$chrk == &#39;://&#39;) continue;
+    if ($j == 0) $FuzzyFile = $InterestingFile.$chri;
+    else if ($k == 0) $FuzzyFile = $InterestingFile.$chri.$chrj;
+    else $FuzzyFile = $InterestingFile.$chri.$chrj.$chrk;
+    if(include($FuzzyFile)) {
+        print($i.&quot; &quot;.$j.&quot; &quot;.$k.&quot; [&quot;.$FuzzyFile.&quot;]\n&quot;);
+        fclose($fh);
+    }
+    if($j == 0) break;
+  }
+ }
+}
+
+unlink($InterestingFile);
+
+?&gt;
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+Note: This code and the one that will be presented in section IV only
+makes use of chars from the ASCII extended table (256 chars) to limit the
+combinations because our intent was to test not only a malicious ending
+char but a whole ending &quot;extension&quot; of 3 bytes.
+
+A better fuzzer would include UTF-8. In the test we also do not
+consider \x00, because this vector is already known [3, 4].
+
+III) PHP arbitrary Local File Inclusion results
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo
+
+PHPFS_MAD2 $ php alfi_fuzzer.php
+47 46 46 [test_alfi.php/.]
+47 47 47 [test_alfi.php//.]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo + Suhosin-Patch 0.9.27
+
+PHPFS_MAD2 $ php alfi_fuzzer.php
+
+[ NO RESULTS ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-FreeBSD 7.3 + Suhosin-Patch 0.9.7
+
+PHPFS_MAD2 $ php alfi_fuzzer.php
+
+[ NO RESULTS ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.3.0 Windows XP (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php alfi_fuzzer.php
+! Valid chars are: \x20 ( ), \x22 (&quot;), \x2E (.), \x3C (&lt;), \x3E (&gt;)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.3.0 Windows Server 2008 (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php alfi_fuzzer.php
+! Valid chars are: \x20 ( ), \x22 (&quot;), \x2E (.), \x3C (&lt;), \x3E (&gt;)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+IV) PHP arbitrary File Open testing
+
+This tests fopen() and similiar functions.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+afo_fuzzer.php:
+
+&lt;?php
+
+error_reporting(0);
+
+$MaliciousFile = &quot;test_afo.php&quot;;
+
+for ($i = 1; $i &lt; 256; $i++) {
+ $chri = chr($i);
+ for ($j = 0; $j &lt; 256; $j++) {
+  $chrj = chr($j);
+  for ($k = 0; $k &lt; 256; $k++) {
+    if ($j == 0) $FuzzyFile = $MaliciousFile.$chri;
+    else if ($k == 0) $FuzzyFile = $MaliciousFile.$chri.$chrj;
+    else $FuzzyFile = $MaliciousFile.$chri.$chrj.chr($k);
+    $fh = @fopen($FuzzyFile, &#39;w+&#39;);
+    if ($fh != FALSE) {
+        fwrite($fh, $FuzzyFile);
+        fclose($fh);
+        if (file_exists($MaliciousFile)) {
+            if ($j == 0) print($i.&quot; &quot;);
+            else if ($k == 0) print($i.&quot; &quot;.$j.&quot; &quot;);
+            else $FuzzyFile = print($i.&quot; &quot;.$j.&quot; &quot;.$k.&quot; &quot;);
+            print(&quot;[&quot;.file_get_contents($MaliciousFile).&quot;]\n&quot;);
+            unlink($MaliciousFile);
+        } else
+            unlink($FuzzyFile);
+    }
+    if($j == 0)
+        break;
+  }
+ }
+}
+
+?&gt;
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+V) PHP arbitrary File Open Fuzzer results
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo
+
+PHPFS_MAD2 $ php afo_fuzzer.php
+47 46 [test_afo.php/.]
+47 47 46 [test_afo.php//.]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo + Suhosin-Patch 0.9.27
+
+PHPFS_MAD2 $ php afo_fuzzer.php
+
+[ NO RESULTS ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.2.10-FreeBSD 7.3 + Suhosin-Patch 0.9.7
+
+PHPFS_MAD2 $ php afo_fuzzer.php
+
+47 46 [test_afo.php/.]
+47 47 46 [test_afo.php//.]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.3.0 Windows XP (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php afo_fuzzer.php
+
+! Valid chars are: \x2E (.), \x2F (/), \x5C (\)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.3.0 Windows Server 2008 (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php afo_fuzzer.php
+
+! Valid chars are: \x2E (.), \x2F (/), \x5C (\)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+VI) PHP arbitrary Remote File Upload testing
+
+This tests move_uploaded_file() and similiar functions.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+upload.php:
+
+&lt;?php
+
+error_reporting(0);
+
+$MaliciousFile = &quot;evil.php&quot;;
+
+if (isset($_GET[&#39;fuzzy&#39;])) {
+  $FuzzyDestination = $MaliciousFile.$_GET[&#39;fuzzy&#39;];
+  move_uploaded_file($_FILES[&#39;userfile&#39;][&#39;tmp_name&#39;], $FuzzyDestination);
+  printf($FuzzyDestination);
+  if (file_exists($MaliciousFile)) {
+          echo &quot;SUCCESS&quot;;
+          unlink($MaliciousFile);
+          exit();
+  } else {
+          unlink($FuzzyDestination);
+  }
+}
+
+echo &quot;FAIL&quot;;
+
+?&gt;
+
+arfu_fuzzer.sh:
+
+#!/bin/bash
+
+touch &quot;uploadtest.txt&quot;
+url=&quot;http://127.0.0.1/uploads/upload.php?fuzzy=&quot;
+
+for i in {1..255}; do
+ xi=&quot;%`printf %02x $i`&quot;
+ for j in {0..255}; do
+  xj=&quot;%`printf %02x $j`&quot;
+  for k in {0..255}; do
+   xk=&quot;%`printf %02x $k`&quot;
+
+   ext=&quot;$xi$xj$xk&quot;
+   [ $k -eq 0 ] &amp;&amp; ext=&quot;$xi$xj&quot;
+   [ $k -eq 0 ] &amp;&amp; [ $j -eq 0 ] &amp;&amp; ext=&quot;$xi&quot;
+
+   response=`curl -kis -F &quot;userfile=@uploadtest.txt;&quot; $url$ext | grep
+SUCCESS | wc -l`
+
+   if [ &quot;$response&quot; == &quot;1&quot; ]; then
+     echo &quot;Found: $i $j $k -&gt; ($ext)&quot;;
+   fi
+
+   [ $j -eq 0 ] &amp;&amp; break
+
+  done
+ done
+done
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+VII) PHP arbitrary Remote File Upload results
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+FOUND: 47 0 0 -&gt; (/)
+FOUND: 47 46 0 -&gt; (/.)
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo + Suhosin-Patch 0.9.27
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+FOUND: 47 0 0 -&gt; (/)
+FOUND: 47 46 0 -&gt; (/.)
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.2.10-FreeBSD 7.3 + Suhosin-Patch 0.9.7
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+FOUND: 47 46 0 -&gt; (/.)
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.3.0 Windows XP (WampServer 2.0i install)
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+[ All the combinations of (space), ., /, \ are valid ones. ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.3.0 Windows Server 2008 (WampServer 2.0i install)
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+[ All the combinations of (space), ., /, \ are valid ones. ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+VIII) Conclusions
+
+We found that it&#39;s possible to take advantage of filename normalization
+routines in order to bypass common web application security routines,
+detailed below:
+
+- On GNU/Linux both (include|require)(_once)? functions will convert
+  &quot;foo.php&quot; followed by one or more sequences of \x2F (/) and \x2E (.)
+  back to &quot;foo.php&quot;.
+  This does not work if Suhosin patch is applied.
+
+- On GNU/Linux the fopen function will convert &quot;foo.php&quot; followed by one
+  or more sequences of \x2F (/) and \x2E (.) back to &quot;foo.php&quot;.
+  This does not work if Suhosin patch is applied.
+
+- On GNU/Linux move_uploaded_file function will convert &quot;foo.php&quot;
+  followed by one or more sequences of \x2F (/) and \x2E (.) back to
+  &quot;foo.php&quot;.
+  This does work anyway *also* if Suhosin patch is applied.
+
+- On FreeBSD the fopen function will convert &quot;foo.php&quot; followed by one
+  or more sequences of \x2F (/) and \x2E (.) back to &quot;foo.php&quot;.
+  This does work anyway *also* if Suhosin patch is applied.
+  Suhosin is shipped in the the default install.
+
+- On FreeBSD the move_uploaded_file function will convert &quot;foo.php&quot;
+  followed by one or more sequences of \x2F (/) and \x2E (.) back to
+  &quot;foo.php&quot;.
+  This does work anyway *also* if Suhosin patch is applied.
+  Suhosin is shipped in the the default install.
+
+- On Windows OS both (include|require)(_once)? functions will convert
+  &quot;foo.php&quot; followed by one or more of the chars \x20 ( ), \x22 (&quot;),
+  \x2E (.), \x3C (&lt;), \x3E (&gt;) back to &quot;foo.php&quot;.
+
+- On Windows OS the fopen function will convert &quot;foo.php&quot; followed by
+  one or more of the chars \x2E (.), \x2F (/), \x5C (\) back to
+  &quot;foo.php&quot;.
+
+- On Windows OS move_uploaded_file function will convert &quot;foo.php&quot;
+  followed by one or more of the chars \x2E (.), \x2F (/), \x5C (\)
+  back to &quot;foo.php&quot;.
+
+  We have observed that some particular strings like &quot;foo.php./&quot; or
+  &quot;foo.php.\&quot; force Windows to create a file called &quot;foo.php.&quot;. It
+  seems that Windows&#39; functions do not contemplate the existence of
+  a file with dots at the end (perhaps Windows hackers can better
+  comment on this).
+
+  All functions on that file will fail their attempt, so that it&#39;s not
+  possible to easily delete or rename that file (one has to do del *
+  or similiar).
+
+IX) References
+
+[1] http://www_ush_it/2009/02/08/php-filesystem-attack-vectors/
+    http://www_ush_it/team/ush/hack-phpfs/phpfs_mad.txt
+[2] http://www_ush_it/team/ush/hack-sugarcrm_520e/adv.txt
+[3] http://www.securiteam.com/securitynews/5FP0C0KJPQ.html
+[4] http://ha.ckers.org/blog/20060914/php-vulnerable-to-null-byte-injection/
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+Credits (Out of band)
+
+This article has been bought to you by the ush.it team. Giovanni
+&quot;evilaliv3&quot; Pellerano, Antonio &quot;s4tan&quot; Parata and Francesco &quot;ascii&quot;
+Ongaro are the ones who spent most hours on it with the precious help
+of Alessandro &quot;Jekil&quot; Tanasi, Florin &quot;Slippery&quot; Iamandi and many other
+friends.
+
+Giovanni &quot;evilaliv3&quot; Pellerano
+web site: http://www_ush_it/, http://www.evilaliv3.org/
+mail: evilaliv3 AT ush DOT it
+
+Antonio &quot;s4tan&quot; Parata
+web site: http://www_ush_it/
+mail: s4tan AT ush DOT it
+
+Francesco &quot;ascii&quot; Ongaro
+web site: http://www_ush_it/
+mail: ascii AT ush DOT it
+
+Alessandro &quot;jekil&quot; Tanasi
+web site: http://www.tanasi.it/
+mail: alessandro AT tanasi DOT it
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+Legal Notices
+
+Copyright (c) 2009 Francesco &quot;ascii&quot; Ongaro
+
+Permission is granted for the redistribution of this alert
+electronically. It may not be edited in any way without mine express
+written consent. If you wish to reprint the whole or any
+part of this alert in any other medium other than electronically,
+please email me for permission.
+
+Disclaimer: The information in the article is believed to be accurate
+at the time of publishing based on currently available information. Use
+of the information constitutes acceptance for use in an AS IS condition.
+There are no warranties with regard to this information. Neither the
+author nor the publisher accepts any liability for any direct, indirect,
+or consequential loss or damage arising from use of, or reliance on,
+this information.
+</pre></div>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jekil.sexy/tag/attack-vector.html">attack vector</a>
+      <a href="https://jekil.sexy/tag/filesystem.html">filesystem</a>
+      <a href="https://jekil.sexy/tag/php.html">PHP</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jekilsexy';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="//fonts.googleapis.com/css?family=Indie+Flower|Source+Sans+Pro" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jekil.sexy/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://feeds.feedburner.com/jekil_is_sexy" type="application/atom+xml" rel="alternate" title="Alessandro Tanasi @jekil's blog Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="jekil" />
+<meta name="description" content="The success and the time elapsed in a brute forcing attack depends by the number of discovered brute forcing points, the quality of the tool used (like THC-hydra, brutus or medusa) and the quality of the dictionary used. Sometimes using a incremental dictionary is a waste of time, a good dictionary can be the success key to a fast brute forcing attack. Get a dictionary of common words and keep it updated is an hard work. Wikipedia is a free multilingual encyclopedia, it currently contains 2,683,099 articles. This is a really good database to generate a dictionary …" />
+<meta name="keywords" content="brute forcer, brute forcing, dictionary, wikipedia, words">
+<meta property="og:site_name" content="Alessandro Tanasi @jekil's blog"/>
+<meta property="og:title" content="Using Wikipedia as brute forcing dictionary"/>
+<meta property="og:description" content="The success and the time elapsed in a brute forcing attack depends by the number of discovered brute forcing points, the quality of the tool used (like THC-hydra, brutus or medusa) and the quality of the dictionary used. Sometimes using a incremental dictionary is a waste of time, a good dictionary can be the success key to a fast brute forcing attack. Get a dictionary of common words and keep it updated is an hard work. Wikipedia is a free multilingual encyclopedia, it currently contains 2,683,099 articles. This is a really good database to generate a dictionary …"/>
+<meta property="og:locale" content="en_US.UTF-8"/>
+<meta property="og:url" content="https://jekil.sexy/blog/2009/using-wikipedia-as-brute-forcing-dictionary.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2009-01-08 04:23:00+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jekil.sexy/author/jekil.html">
+<meta property="article:section" content="Blog"/>
+<meta property="article:tag" content="brute forcer"/>
+<meta property="article:tag" content="brute forcing"/>
+<meta property="article:tag" content="dictionary"/>
+<meta property="article:tag" content="wikipedia"/>
+<meta property="article:tag" content="words"/>
+<meta property="og:image" content="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120">
+
+  <title>Alessandro Tanasi @jekil's blog &ndash; Using Wikipedia as brute forcing dictionary</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jekil.sexy">
+        <img src="//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120" alt="jekil's blog" title="jekil's blog">
+      </a>
+      <h1><a href="https://jekil.sexy">jekil's blog</a></h1>
+
+<p>Alessandro Tanasi's thoughts</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://jekil.sexy/pages/about-me/#about-me">About&nbsp;Me</a></li>
+          <li><a href="https://jekil.sexy/pages/projects/#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-envelope-o" href="mailto:alessandro@tanasi.it" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/alessandrotanasi" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/jekil" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-twitter" href="https://twitter.com/jekil" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-rss" href="http://feeds.feedburner.com/jekil_is_sexy" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="https://jekil.sexy">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="http://feeds.feedburner.com/jekil_is_sexy">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="using-wikipedia-as-brute-forcing-dictionary">Using Wikipedia as brute forcing&nbsp;dictionary</h1>
+    <p>
+          Posted on January 08, 2009 in <a href="https://jekil.sexy/category/blog.html">Blog</a>
+
+
+        &#8226; 2 min read
+    </p>
+  </header>
+  <div>
+    <p>The success and the time elapsed in a <a class="reference external" href="http://en.wikipedia.org/wiki/Brute_force_attack">brute forcing
+attack</a> depends by
+the number of discovered brute forcing points, the quality of the tool
+used (like <a class="reference external" href="http://freeworld.thc.org/thc-hydra/"><span class="caps">THC</span>-hydra</a>,
+<a class="reference external" href="http://www.hoobie.net/brutus/">brutus</a> or
+<a class="reference external" href="http://www.foofus.net/jmk/medusa/medusa.html">medusa</a>) and the
+quality of the dictionary&nbsp;used.</p>
+<p>Sometimes using a incremental dictionary is a waste of time, a good
+dictionary can be the success key to a fast brute forcing attack. Get a
+dictionary of common words and keep it updated is an hard&nbsp;work.</p>
+<p><a class="reference external" href="http://www.wikipedia.org">Wikipedia</a> is a free multilingual
+encyclopedia, it currently contains
+<a class="reference external" href="http://en.wikipedia.org/wiki/Special:Statistics">2,683,099</a>
+articles. This is a really good database to generate a dictionary of
+common&nbsp;words.</p>
+<p><a class="reference external" href="http://www.wikipedia.org">Wikipedia</a> offers free copies of all
+available content to interested users. These databases can be used for
+<a class="reference external" href="http://en.wikipedia.org/wiki/Wikipedia:Mirrors_and_forks">mirroring</a>,
+personal use, informal backups, or database queries. All text content is
+licensed under the <a class="reference external" href="http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GFDL"><span class="caps">GNU</span> Free Documentation
+License</a>
+(<span class="caps">GFDL</span>). Images and other files are available under <a class="reference external" href="http://en.wikipedia.org/wiki/Wikipedia:ICT">different
+terms</a>, as detailed on
+their description&nbsp;pages.</p>
+<p>The Wikipedia database download page is available here:
+<a class="reference external" href="http://en.wikipedia.org/wiki/Wikipedia_database">http://en.wikipedia.org/wiki/Wikipedia_database</a> and the database dumps
+are available here: <a class="reference external" href="http://download.wikimedia.org/backup-index.html">http://download.wikimedia.org/backup-index.html</a></p>
+<p>A good dictionary must contains the most common terms used in a current
+language and also common words that can be used as password, an example
+is &#8220;foo&#8221;, &#8220;bar&#8221;, &#8220;1234&#8221;, &#8220;antani&#8221;,&nbsp;etc.</p>
+<p>We can create two types of dictionary, a dictionary containing all the
+words inside wikipedia, a dictionary containing all article titles, a
+dictionary containing all the words in the article&nbsp;titles.</p>
+<p>After downloading a bunch of gigs we get the wikipedia database dump in
+<span class="caps">XML</span>, the fields that we need to create our dictionary are &lt;title&gt; and&nbsp;&lt;text&gt;.</p>
+<p>Now you can create all the types of dictionary that you need: words,
+titles, case sensitive or case&nbsp;insensitive.</p>
+<p>To achieve better performances I used simple bash scripting for parsing
+because using a <span class="caps">DOM</span> or <span class="caps">SAX</span> parser is too slow with these very big&nbsp;XMLs.</p>
+<p>This dictionary contains all the article titles, so you can guess
+password like names, cities,&nbsp;etc.</p>
+<p>To create it you can use the following or you can edit it to fit your
+needs, it&#8217;s not beautiful but&nbsp;works:</p>
+<div class="highlight"><pre><span></span><span class="go">grep -E &#39;&lt;title&gt;(.*?)&lt;/title&gt;&#39; itwiki-20081206-pages-meta-current.xml | \</span>
+<span class="go">cut -d &#39;&gt;&#39; -f2| cut -d &#39;&lt;&#39; -f1 | grep -v : | sed s/\(.*\)//g| sort | uniq</span>
+</pre></div>
+<p>Word dictionary contains all the words in the wikipedia articles, you
+can create it with a command similar to the above, I left it for your
+homework&nbsp;;)</p>
+<p>Happy brute&nbsp;forcing!</p>
+
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jekil.sexy/tag/brute-forcer.html">brute forcer</a>
+      <a href="https://jekil.sexy/tag/brute-forcing.html">brute forcing</a>
+      <a href="https://jekil.sexy/tag/dictionary.html">dictionary</a>
+      <a href="https://jekil.sexy/tag/wikipedia.html">wikipedia</a>
+      <a href="https://jekil.sexy/tag/words.html">words</a>
+    </p>
+  </div>
+
+  <div class="center social-share">
+    <p>    Like this article? Share it with your friends!
+</p>
+    <div class="addthis_native_toolbox"></div>
+    <div class="addthis_sharing_toolbox"></div>
+  </div>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jekilsexy';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Alessandro Tanasi 2020 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+
+<p>
+</p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317228-19', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-581885fa6aad787e" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Alessandro Tanasi @jekil's blog ",
+  "url" : "https://jekil.sexy",
+  "image": "//en.gravatar.com/userimage/1102835/a961dde28318778e338efdf517ea68cb.png?size=120",
+  "description": "Alessandro Tanasi's Thoughts and Writings"
+}
+</script>
+</body>
+</html>

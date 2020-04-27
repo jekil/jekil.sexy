@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /secred-admin/
+Disallow: /GlobalThermonuclearWar/
+Disallow: /MacheteKicks/
+
+# Disallow parsing individual post feeds, categories and trackbacks..
+Disallow: */feed/
+Disallow: /category/* 
+
+User-agent: ia_archiver
+Disallow: /
