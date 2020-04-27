@@ -19,7 +19,7 @@ USE_LESS = False
 
 # Third party services.
 ADD_THIS_ID = 'ra-581885fa6aad787e'
-#DISQUS_SITENAME = ''
+DISQUS_SITENAME = 'jekilsexy'
 GOOGLE_ANALYTICS = 'UA-2317228-19'
 #GOOGLE_TAG_MANAGER = ''
 #STATUSCAKE = { 'trackid': 'your-id', 'days': 7, 'design': 6, 'rumid': 1234 }
